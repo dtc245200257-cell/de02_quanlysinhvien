@@ -82,6 +82,7 @@ const dbConfig = {
   user: process.env.MYSQL_USER || 'student_user',
   password: process.env.MYSQL_PASSWORD || 'StudentPass_2026!Sec',
   database: process.env.MYSQL_DATABASE || 'qlsinhvien',
+  charset: 'utf8mb4',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -93,6 +94,7 @@ async function initDbConnection(retries = 15, delay = 3000) {
   while (retries > 0) {
     try {
       pool = mysql.createPool(dbConfig);
+      await pool.query('SET NAMES utf8mb4');
       const [rows] = await pool.query('SELECT 1 + 1 AS result');
       console.log(JSON.stringify({
         timestamp: new Date().toISOString(),

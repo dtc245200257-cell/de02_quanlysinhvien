@@ -13,6 +13,28 @@ document.addEventListener('DOMContentLoaded', () => {
   loadGrades();
   checkHealth();
 
+  // Tab switching handler
+  document.querySelectorAll('.navbar-nav [data-bs-toggle="tab"]').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetSelector = btn.getAttribute('data-bs-target') || btn.getAttribute('href');
+      if (!targetSelector || targetSelector === '#') return;
+
+      document.querySelectorAll('.navbar-nav .nav-link').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      document.querySelectorAll('.tab-content .tab-pane').forEach((p) => p.classList.remove('show', 'active'));
+      const targetPane = document.querySelector(targetSelector);
+      if (targetPane) {
+        targetPane.classList.add('show', 'active');
+      }
+
+      if (targetSelector === '#tab-dashboard' && gradeChart) {
+        gradeChart.resize();
+      }
+    });
+  });
+
   // Search & filter events
   document.getElementById('search-student').addEventListener('input', debounce(loadStudents, 300));
   document.getElementById('filter-student-class').addEventListener('change', loadStudents);

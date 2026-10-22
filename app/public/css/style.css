@@ -47,6 +47,9 @@ body {
 .nav-link {
   font-weight: 500;
   transition: all 0.2s ease;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
 
 .card {

@@ -3,6 +3,9 @@
 -- Sinh vien: DTC245200257
 -- ========================================================
 
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 CREATE DATABASE IF NOT EXISTS qlsinhvien CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE qlsinhvien;
 
@@ -85,7 +88,7 @@ ON DUPLICATE KEY UPDATE course_name = VALUES(course_name);
 
 -- Du lieu Sinh vien
 INSERT INTO students (student_code, full_name, date_of_birth, gender, email, phone, class_id) VALUES
-('DTC245200257', 'Nguyễn Đăng Khoa', '2004-05-15', 'Nam', 'dtc245200257@student.edu.vn', '0912345678', 1),
+('DTC245200257', 'Lương Hải Anh', '2004-05-15', 'Nam', 'dtc245200257@student.edu.vn', '0912345678', 1),
 ('SV2026001', 'Trần Thị Mai', '2004-03-22', 'Nữ', 'maitt@student.edu.vn', '0923456789', 1),
 ('SV2026002', 'Lê Hoàng Nam', '2004-07-10', 'Nam', 'namlh@student.edu.vn', '0934567890', 1),
 ('SV2026003', 'Phạm Minh Tuấn', '2004-11-05', 'Nam', 'tuanpm@student.edu.vn', '0945678901', 2),
