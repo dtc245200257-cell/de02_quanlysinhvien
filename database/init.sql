@@ -76,7 +76,7 @@ INSERT INTO classes (class_code, class_name, faculty, academic_year) VALUES
 ('CNTT-K18B', 'Công nghệ Thông tin K18B', 'Khoa Công nghệ Thông tin', '2023-2027'),
 ('KTPM-K18', 'Kỹ thuật Phần mềm K18', 'Khoa Kỹ thuật Phần mềm', '2023-2027'),
 ('HTTT-K18', 'Hệ thống Thông tin K18', 'Khoa Hệ thống Thông tin', '2023-2027')
-ON DUPLICATE KEY UPDATE class_name = VALUES(class_name);
+ON DUPLICATE KEY UPDATE class_name = VALUES(class_name), faculty = VALUES(faculty), academic_year = VALUES(academic_year);
 
 -- Du lieu Mon hoc
 INSERT INTO courses (course_code, course_name, credits) VALUES
