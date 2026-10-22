@@ -1,0 +1,128 @@
+version: '3.8'
+
+# ========================================================
+# DE TAI 02: HE THONG QUAN LY SINH VIEN
+# Sinh vien: DTC245200257
+# Stack: Node.js/Express + MySQL 8.0 + phpMyAdmin + Nginx Reverse Proxy
+# ========================================================
+
+networks:
+  frontend_net:
+    driver: bridge
+  backend_net:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  nginx_logs:
+    driver: local
+
+services:
+  # ==========================================
+  # DATABASE: MySQL 8.0
+  # Hardening: Khong expose port 3306 ra host
+  # ==========================================
+  db:
+    image: mysql:8.0
+    container_name: qlsv_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-RootPass_QLSV@2026!Secured}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-qlsinhvien}
+      MYSQL_USER: ${MYSQL_USER:-student_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-StudentPass_2026!Sec}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    networks:
+      - backend_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-RootPass_QLSV@2026!Secured}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1024M
+
+  # ==========================================
+  # WEB APPLICATION: Node.js / Express
+  # Hardening: Run as non-root user (node:node)
+  # ==========================================
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: qlsv_app
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-qlsinhvien}
+      MYSQL_USER: ${MYSQL_USER:-student_user}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-StudentPass_2026!Sec}
+    networks:
+      - backend_net
+    depends_on:
+      db:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # ==========================================
+  # DATABASE MANAGEMENT: phpMyAdmin
+  # ==========================================
+  phpmyadmin:
+    image: phpmyadmin:5.2.1-apache
+    container_name: qlsv_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 0
+      UPLOAD_LIMIT: 64M
+    networks:
+      - backend_net
+    depends_on:
+      db:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+  # ==========================================
+  # REVERSE PROXY: Nginx (SSL & Security Headers)
+  # ==========================================
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: qlsv_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - frontend_net
+      - backend_net
+    depends_on:
+      - app
+      - phpmyadmin
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
