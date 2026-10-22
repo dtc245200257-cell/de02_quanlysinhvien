@@ -1,0 +1,138 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 100,
+      "title": "📜 HỆ THỐNG QUẢN LÝ LOG TẬP TRUNG (LOKI + PROMTAIL + LOGQL)",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "Loki" },
+      "fieldConfig": {
+        "defaults": {
+          "custom": { "drawStyle": "bars", "fillOpacity": 80 },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "h": 6, "w": 24, "x": 0, "y": 1 },
+      "id": 1,
+      "options": { "tooltip": { "mode": "single", "sort": "none" } },
+      "targets": [
+        {
+          "datasource": { "type": "loki", "uid": "Loki" },
+          "editorMode": "code",
+          "expr": "sum by (container) (rate({container=~\"qlsv_.*\"}[1m]))",
+          "legendFormat": "{{container}}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Tần suất sinh Log theo Container (LogQL: sum by (container) (rate(...)))",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 7 },
+      "id": 101,
+      "title": "🔍 TRUY VẤN VÀ HIỂN THỊ LOG CHI TIẾT (LOGQL STREAM)",
+      "type": "row"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "Loki" },
+      "gridPos": { "h": 10, "w": 12, "x": 0, "y": 8 },
+      "id": 2,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": true,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": { "type": "loki", "uid": "Loki" },
+          "editorMode": "code",
+          "expr": "{container=\"qlsv_app\"}",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log Ứng dụng Node.js (LogQL: {container=\"qlsv_app\"})",
+      "type": "logs"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "Loki" },
+      "gridPos": { "h": 10, "w": 12, "x": 12, "y": 8 },
+      "id": 3,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": true,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": { "type": "loki", "uid": "Loki" },
+          "editorMode": "code",
+          "expr": "{container=\"qlsv_nginx\"} | json",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Log Nginx Reverse Proxy (LogQL: {container=\"qlsv_nginx\"} | json)",
+      "type": "logs"
+    },
+    {
+      "datasource": { "type": "loki", "uid": "Loki" },
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 18 },
+      "id": 4,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": true,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "datasource": { "type": "loki", "uid": "Loki" },
+          "editorMode": "code",
+          "expr": "{container=~\"qlsv_.*\"} |= \"error\" or {container=~\"qlsv_.*\"} |= \"warn\"",
+          "queryType": "range",
+          "refId": "A"
+        }
+      ],
+      "title": "Bộ lọc Cảnh báo & Lỗi toàn hệ thống (LogQL: {container=~\"qlsv_.*\"} |= \"error\" or \"warn\")",
+      "type": "logs"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["loki", "logql", "logs", "dtc245200257"],
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {
+    "refresh_intervals": ["5s", "10s", "30s", "1m"]
+  },
+  "title": "Hệ thống Quản lý Sinh viên - Log Tập trung (Loki & LogQL)",
+  "uid": "qlsv-loki-logs-overview",
+  "version": 1
+}

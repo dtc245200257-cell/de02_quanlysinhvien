@@ -1,18 +1,29 @@
 version: '3.8'
 
-# ========================================================
-# DE TAI 02: HE THONG QUAN LY SINH VIEN
-# Sinh vien: DTC245200257
-# Stack: Node.js/Express + MySQL 8.0 + phpMyAdmin + Nginx + Prometheus + Grafana
-# ========================================================
+# ==============================================================================
+# ĐỀ TÀI 02: HỆ THỐNG QUẢN LÝ SINH VIÊN
+# Môn học: Triển khai và Quản trị Hệ thống Phần mềm
+# Sinh viên: DTC245200257 (dtc245200257-cell)
+#
+# FULL PRODUCTION STACK VỚI HARDENING TOÀN DIỆN:
+# - Web App: Node.js/Express (Non-root user node UID 1000)
+# - Database: MySQL 8.0 + phpMyAdmin (Cô lập mạng backend, user đặc thù)
+# - Reverse Proxy: Nginx 1.25 Alpine (HTTPS SSL tự ký, Security Headers, HSTS)
+# - Monitoring: Prometheus v2.51.0 + Grafana v10.4.1 (Non-root users)
+# - Exporters: MySQL Exporter + Node Exporter + cAdvisor
+# - Centralized Logging: Grafana Loki v2.9.2 + Promtail v2.9.2 (LogQL)
+# ==============================================================================
 
 networks:
   frontend_net:
     driver: bridge
+    name: qlsv_frontend_net
   backend_net:
     driver: bridge
+    name: qlsv_backend_net
   monitoring_net:
     driver: bridge
+    name: qlsv_monitoring_net
 
 volumes:
   mysql_data:
@@ -23,12 +34,17 @@ volumes:
     driver: local
   grafana_data:
     driver: local
+  loki_data:
+    driver: local
 
 services:
-  # ==========================================
-  # DATABASE: MySQL 8.0
-  # Hardening: Khong expose port 3306 ra host
-  # ==========================================
+  # ============================================================================
+  # 1. DATABASE: MySQL 8.0
+  # Hardening:
+  # - Không mở cổng 3306 ra host bên ngoài (chỉ giao tiếp trong backend_net)
+  # - Khởi tạo tài khoản riêng student_user hạn chế quyền (SELECT/INSERT/UPDATE/DELETE)
+  # - Mật khẩu mạnh từ biến môi trường
+  # ============================================================================
   db:
     image: mysql:8.0
     container_name: qlsv_mysql
@@ -55,16 +71,21 @@ services:
           cpus: '1.0'
           memory: 1024M
 
-  # ==========================================
-  # WEB APPLICATION: Node.js / Express
-  # Hardening: Run as non-root user (node:node)
-  # ==========================================
+  # ============================================================================
+  # 2. WEB APPLICATION: Node.js / Express
+  # Hardening:
+  # - Run as non-root user (node:node UID 1000)
+  # - no-new-privileges: true
+  # - Kết nối DB bằng user phân quyền tối thiểu student_user
+  # ============================================================================
   app:
     build:
       context: ./app
       dockerfile: Dockerfile
     container_name: qlsv_app
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     environment:
       NODE_ENV: production
       PORT: 3000
@@ -85,13 +106,15 @@ services:
           cpus: '0.5'
           memory: 512M
 
-  # ==========================================
-  # DATABASE MANAGEMENT: phpMyAdmin
-  # ==========================================
+  # ============================================================================
+  # 3. DATABASE MANAGEMENT: phpMyAdmin
+  # ============================================================================
   phpmyadmin:
     image: phpmyadmin:5.2.1-apache
     container_name: qlsv_phpmyadmin
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
@@ -108,13 +131,20 @@ services:
           cpus: '0.5'
           memory: 256M
 
-  # ==========================================
-  # REVERSE PROXY: Nginx (SSL & Security Headers)
-  # ==========================================
+  # ============================================================================
+  # 4. REVERSE PROXY: Nginx 1.25 Alpine
+  # Hardening:
+  # - Chuyển hướng toàn bộ HTTP (Port 80) sang HTTPS (Port 443)
+  # - Mã hóa TLS 1.2 & TLS 1.3, ciphers hiện đại
+  # - Security headers: HSTS, X-Frame-Options, X-Content-Type-Options, CSP, XSS
+  # - Ẩn phiên bản Nginx (server_tokens off)
+  # ============================================================================
   nginx:
     image: nginx:1.25-alpine
     container_name: qlsv_nginx
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "80:80"
       - "443:443"
@@ -135,15 +165,17 @@ services:
           cpus: '0.5'
           memory: 256M
 
-  # ==========================================
-  # MONITORING: Prometheus Server
-  # Hardening: Run as non-root user (nobody:nobody)
-  # ==========================================
+  # ============================================================================
+  # 5. MONITORING: Prometheus Server
+  # Hardening: Run as non-root user nobody:nobody (UID 65534)
+  # ============================================================================
   prometheus:
     image: prom/prometheus:v2.51.0
     container_name: qlsv_prometheus
     restart: unless-stopped
     user: "65534:65534"
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "9090:9090"
     volumes:
@@ -164,15 +196,17 @@ services:
           cpus: '0.5'
           memory: 512M
 
-  # ==========================================
-  # MONITORING: Grafana Dashboard
-  # Hardening: Run as user grafana (472)
-  # ==========================================
+  # ============================================================================
+  # 6. MONITORING: Grafana Dashboard
+  # Hardening: Run as non-root user grafana (UID 472)
+  # ============================================================================
   grafana:
     image: grafana/grafana:10.4.1
     container_name: qlsv_grafana
     restart: unless-stopped
     user: "472:472"
+    security_opt:
+      - no-new-privileges:true
     ports:
       - "3000:3000"
     environment:
@@ -193,15 +227,17 @@ services:
           cpus: '0.5'
           memory: 512M
 
-  # ==========================================
-  # EXPORTER: MySQL Database Exporter
-  # ==========================================
+  # ============================================================================
+  # 7. EXPORTER: MySQL Database Exporter
+  # ============================================================================
   mysqld-exporter:
     image: prom/mysqld-exporter:v0.15.1
     container_name: qlsv_mysqld_exporter
     restart: unless-stopped
-    environment:
-      - DATA_SOURCE_NAME=root:${MYSQL_ROOT_PASSWORD:-RootPass_QLSV@2026!Secured}@(db:3306)/
+    command:
+      - '--config.my-cnf=/.my.cnf'
+    volumes:
+      - ./database/my.cnf:/.my.cnf:ro
     networks:
       - backend_net
       - monitoring_net
@@ -214,9 +250,9 @@ services:
           cpus: '0.2'
           memory: 128M
 
-  # ==========================================
-  # EXPORTER: Node Exporter (Host System Metrics)
-  # ==========================================
+  # ============================================================================
+  # 8. EXPORTER: Node Exporter (Host System Resource Metrics)
+  # ============================================================================
   node-exporter:
     image: prom/node-exporter:v1.7.0
     container_name: qlsv_node_exporter
@@ -237,3 +273,74 @@ services:
         limits:
           cpus: '0.2'
           memory: 128M
+
+  # ============================================================================
+  # 9. EXPORTER: cAdvisor (Docker Container Metrics)
+  # ============================================================================
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    container_name: qlsv_cadvisor
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    devices:
+      - /dev/kmsg
+    networks:
+      - monitoring_net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
+
+  # ============================================================================
+  # 10. CENTRALIZED LOGGING: Grafana Loki
+  # Hardening: Run as non-root user loki (UID 10001)
+  # ============================================================================
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: qlsv_loki
+    restart: unless-stopped
+    user: "10001:10001"
+    security_opt:
+      - no-new-privileges:true
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+      - loki_data:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - monitoring_net
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # ============================================================================
+  # 11. LOG COLLECTOR: Promtail
+  # ============================================================================
+  promtail:
+    image: grafana/promtail:2.9.2
+    container_name: qlsv_promtail
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - nginx_logs:/var/log/nginx:ro
+      - ./promtail/promtail-config.yml:/etc/promtail/config.yml:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - monitoring_net
+    depends_on:
+      - loki
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: 256M
