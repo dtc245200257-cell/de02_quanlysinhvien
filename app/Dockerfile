@@ -14,7 +14,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Cai dat dependencies che do production
-RUN npm ci --only=production || npm install --omit=dev
+RUN npm install --omit=dev
 
 # Sao chep toan bo ma nguon ung dung
 COPY . .
