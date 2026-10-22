@@ -327,7 +327,7 @@ services:
   # 11. LOG COLLECTOR: Promtail
   # ============================================================================
   promtail:
-    image: grafana/promtail:2.9.2
+    image: grafana/promtail:latest
     container_name: qlsv_promtail
     restart: unless-stopped
     volumes:
