@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>BÁO CÁO THỰC HÀNH - ĐỀ TÀI 02: HỆ THỐNG QUẢN LÝ SINH VIÊN</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 20mm 20mm 20mm 25mm;
+    }
+    body {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 13pt;
+      line-height: 1.45;
+      color: #000;
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    .cover-page {
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 90vh;
+      border: 3px double #003366;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .cover-header {
+      font-size: 14pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #003366;
+      margin-bottom: 20px;
+    }
+    .cover-header span {
+      display: block;
+      font-size: 13pt;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .cover-logo {
+      margin: 20px 0;
+    }
+    .cover-logo img {
+      width: 170px;
+      height: auto;
+    }
+    .cover-title {
+      margin: 25px 0;
+    }
+    .cover-title h1 {
+      font-size: 20pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 5px 0;
+      color: #cc0000;
+    }
+    .cover-title h2 {
+      font-size: 15pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 10px 0;
+      color: #003366;
+    }
+    .cover-title h3 {
+      font-size: 16pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #000;
+      margin-top: 15px;
+      line-height: 1.3;
+    }
+    .cover-info {
+      text-align: left;
+      width: 80%;
+      margin: 30px auto;
+      font-size: 13pt;
+      line-height: 1.8;
+    }
+    .cover-info table {
+      width: 100%;
+      border: none;
+    }
+    .cover-info td {
+      border: none;
+      padding: 4px 0;
+    }
+    .cover-footer {
+      font-size: 13pt;
+      font-style: italic;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+    .page-break {
+      page-break-after: always;
+    }
+    h1.sec-title {
+      font-size: 16pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #003366;
+      margin-top: 25px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 4px;
+    }
+    h2.sub-title {
+      font-size: 14pt;
+      font-weight: bold;
+      color: #000;
+      margin-top: 18px;
+      margin-bottom: 8px;
+    }
+    h3.sub-sub-title {
+      font-size: 13pt;
+      font-weight: bold;
+      font-style: italic;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+    p {
+      text-align: justify;
+      margin: 6px 0 10px 0;
+      text-indent: 1cm;
+    }
+    p.no-indent {
+      text-indent: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 12pt;
+    }
+    table, th, td {
+      border: 1px solid #333;
+    }
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      text-align: center;
+      padding: 8px 5px;
+    }
+    td {
+      padding: 6px 8px;
+      text-align: left;
+    }
+    td.center {
+      text-align: center;
+    }
+    .caption {
+      font-style: italic;
+      text-align: center;
+      margin: 5px 0 15px 0;
+      font-size: 11pt;
+    }
+    pre {
+      background-color: #f8f9fa;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 10px 14px;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 11pt;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      margin: 10px 0 15px 0;
+    }
+    ul, ol {
+      margin: 6px 0 12px 0;
+      padding-left: 28px;
+      text-align: justify;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+    .toc {
+      line-height: 1.6;
+    }
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .highlight {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= TRANG BÌA ================= -->
+  <div class="cover-page">
+    <div class="cover-header">
+      BỘ GIÁO DỤC VÀ ĐÀO TẠO<br>
+      TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG
+      <span>KHOA CÔNG NGHỆ THÔNG TIN</span>
+    </div>
+
+    <div class="cover-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/vi/6/6b/Logo_ICTU.png" alt="Logo ICTU">
+    </div>
+
+    <div class="cover-title">
+      <h1>BÁO CÁO THỰC HÀNH</h1>
+      <h2>MÔN: TRIỂN KHAI VÀ QUẢN TRỊ HỆ THỐNG PHẦN MỀM</h2>
+      <h3>ĐỀ TÀI: HỆ THỐNG QUẢN LÝ SINH VIÊN</h3>
+    </div>
+
+    <div class="cover-info">
+      <table>
+        <tr>
+          <td style="width: 45%;"><strong>SINH VIÊN THỰC HIỆN:</strong></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><strong>HỌ VÀ TÊN:</strong></td>
+          <td><span style="font-size: 14pt; font-weight: bold; color: #003366;">LƯƠNG HẢI ANH</span></td>
+        </tr>
+        <tr>
+          <td><strong>MÃ SINH VIÊN:</strong></td>
+          <td><strong>DTC245200257</strong></td>
+        </tr>
+        <tr>
+          <td><strong>LỚP CHUYÊN NGÀNH:</strong></td>
+          <td><strong>CÔNG NGHỆ THÔNG TIN</strong></td>
+        </tr>
+        <tr>
+          <td><strong>GIẢNG VIÊN HƯỚNG DẪN:</strong></td>
+          <td><span style="font-size: 13.5pt; font-weight: bold;">VŨ VIỆT DŨNG</span></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="cover-footer">
+      Thái Nguyên, ngày .., tháng .., năm 2026
+    </div>
+  </div>
+
+  <!-- ================= LỜI MỞ ĐẦU ================= -->
+  <h1 class="sec-title">LỜI MỞ ĐẦU</h1>
+  <p>
+    Báo cáo này ghi lại toàn bộ quá trình xây dựng, triển khai và vận hành đề tài số 02 – <strong>Hệ thống Quản lý Sinh viên</strong> (Student Management System) trong học phần <em>Triển khai và Quản trị Hệ thống Phần mềm</em>. Thay vì chỉ tập trung vào việc viết mã nguồn các chức năng CRUD cơ bản, đề bài yêu cầu phải triển khai đồng thời một hệ sinh thái hoàn chỉnh gồm: cơ sở dữ liệu quan hệ, reverse proxy bảo mật, giám sát thời gian thực, thu thập log tập trung, gia cố an toàn hệ thống (hardening) và quản lý mã nguồn nghiêm ngặt theo phiên bản trên GitHub. Vì vậy, hệ thống được tổ chức theo mô hình vi dịch vụ phân tán (microservices) được container hóa bằng Docker Compose, đảm bảo vận hành ổn định và độc lập giữa các thành phần.
+  </p>
+  <p>
+    Trong suốt quá trình thực hành, em luôn ưu tiên kiểm tra từng thành phần bằng dữ liệu và câu lệnh thực tế trên máy chủ Ubuntu Server 24.04 LTS (địa chỉ IP <code>192.168.253.129</code>). Ứng dụng Web Node.js/Express được kiểm thử kỹ lưỡng qua các tình huống thêm mới sinh viên, sửa đổi thông tin, kiểm tra ràng buộc duy nhất (Unique constraint) của mã sinh viên và email, tính toán điểm trung bình GPA tự động; MySQL 8.0 được kết nối an toàn bằng user đặc thù và quản trị trực quan qua phpMyAdmin; Nginx Reverse Proxy được kiểm tra chuyển hướng HTTP sang HTTPS và đo lường các Security Headers; Prometheus được đối chiếu trạng thái 5/5 Targets đều UP; Loki và Promtail được kiểm tra qua các câu truy vấn LogQL thực tế; các biện pháp hardening được xác minh trực tiếp bằng lệnh kiểm tra người dùng non-root (<code>id</code>), phân tách network (<code>Internal=true</code>) và cờ bảo mật trong container runtime.
+  </p>
+  <p>
+    Một số lỗi kỹ thuật phát sinh trong quá trình hoàn thiện thực tế cũng được ghi nhận chi tiết: lỗi phân giải địa chỉ <code>localhost</code> sang IPv6 trên nhân Alpine Linux khiến Healthcheck ban đầu bị từ chối kết nối (đã khắc phục bằng cách chỉ định rõ IP <code>127.0.0.1</code>), tường lửa máy chủ Ubuntu (UFW) mặc định chặn cổng giám sát 3000 và 9090 (đã cấu hình mở quy tắc firewall tương ứng), và cấu hình <code>mysqld-exporter</code> yêu cầu file xác thực <code>.my.cnf</code> thay vì biến môi trường trực tiếp. Việc ghi nhận trung thực các vấn đề này phản ánh đúng quá trình làm việc và giải quyết lỗi thực tế.
+  </p>
+  <p>
+    Mọi số liệu, cấu hình và bảng biểu trong báo cáo đều được trích xuất từ hệ thống thực tế đang vận hành. Báo cáo không dùng số liệu giả lập cho những phần chưa được kiểm chứng, qua đó phản ánh đúng năng lực triển khai và quản trị hệ thống của sinh viên.
+  </p>
+
+  <div class="page-break"></div>
+
+  <!-- ================= MỤC LỤC ================= -->
+  <h1 class="sec-title">MỤC LỤC</h1>
+  <div class="toc">
+    <div class="toc-item"><span><strong>LỜI MỞ ĐẦU</strong></span><span><strong>2</strong></span></div>
+    <div class="toc-item"><span><strong>CHƯƠNG 1. TỔNG QUAN</strong></span><span><strong>4</strong></span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>1.1. Giới thiệu đề tài</span><span>4</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>1.2. Lý do chọn cách triển khai</span><span>4</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>1.3. Mục tiêu</span><span>5</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>1.4. Phạm vi</span><span>5</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>1.5. Phương pháp thực hiện</span><span>5</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>1.6. Đối chiếu yêu cầu đề bài</span><span>6</span></div>
+    <div class="toc-item"><span><strong>CHƯƠNG 2. CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ SỬ DỤNG</strong></span><span><strong>7</strong></span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.1. Docker và Docker Compose</span><span>7</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.2. Node.js và Express.js</span><span>7</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.3. MySQL 8.0 và phpMyAdmin</span><span>7</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.4. Nginx Reverse Proxy</span><span>8</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.5. Prometheus, Exporters và cAdvisor</span><span>8</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.6. Grafana</span><span>8</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.7. Loki, Promtail và LogQL</span><span>8</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>2.8. Hardening cơ bản trong môi trường container</span><span>9</span></div>
+    <div class="toc-item"><span><strong>CHƯƠNG 3. PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG</strong></span><span><strong>10</strong></span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>3.1. Phân tích yêu cầu chức năng</span><span>10</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>3.2. Yêu cầu phi chức năng</span><span>10</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>3.3. Kiến trúc tổng thể</span><span>11</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>3.4. Thiết kế dữ liệu</span><span>12</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>3.5. Quy trình nghiệp vụ hệ thống</span><span>12</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>3.6. Thiết kế network và cổng</span><span>14</span></div>
+    <div class="toc-item"><span><strong>CHƯƠNG 4. XÂY DỰNG VÀ TRIỂN KHAI</strong></span><span><strong>15</strong></span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.1. Môi trường thực hiện</span><span>15</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.2. Triển khai bằng Docker Compose</span><span>15</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.3. Xây dựng chức năng Student Management System</span><span>16</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.4. MySQL và phpMyAdmin</span><span>17</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.5. Nginx Reverse Proxy và security headers</span><span>17</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.6. Prometheus và Grafana</span><span>18</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.7. Loki và Promtail</span><span>19</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>4.8. Hardening và quản lý mã nguồn</span><span>20</span></div>
+    <div class="toc-item"><span><strong>CHƯƠNG 5. KIỂM THỬ VÀ ĐÁNH GIÁ</strong></span><span><strong>22</strong></span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>5.1. Phương pháp kiểm thử</span><span>22</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>5.2. Kết quả kiểm thử chức năng</span><span>22</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>5.3. Kết quả kiểm thử hạ tầng và bảo mật</span><span>23</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>5.4. Các lỗi phát hiện trong quá trình hoàn thiện</span><span>24</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>5.5. Đánh giá theo yêu cầu đề bài</span><span>25</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>5.6. Hạn chế</span><span>25</span></div>
+    <div class="toc-item" style="padding-left: 20px;"><span>5.7. Hướng phát triển</span><span>26</span></div>
+    <div class="toc-item"><span><strong>KẾT LUẬN</strong></span><span><strong>27</strong></span></div>
+    <div class="toc-item"><span><strong>TÀI LIỆU THAM KHẢO</strong></span><span><strong>28</strong></span></div>
+    <div class="toc-item"><span><strong>PHỤ LỤC</strong></span><span><strong>29</strong></span></div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- ================= CHƯƠNG 1 ================= -->
+  <h1 class="sec-title">CHƯƠNG 1. TỔNG QUAN</h1>
+  
+  <h2 class="sub-title">1.1. Giới thiệu đề tài</h2>
+  <p>
+    Quản lý sinh viên là một trong những hoạt động nghiệp vụ trọng tâm tại các trường đại học và cơ sở giáo dục. Hệ thống Quản lý Sinh viên (Đề tài 02) được xây dựng nhằm tin học hóa và chuẩn hóa toàn diện quy trình theo dõi hồ sơ sinh viên, phân bổ lớp chuyên ngành, quản lý môn đào tạo và tổng hợp điểm số.
+  </p>
+  <p>
+    Ứng dụng cung cấp bảng điều khiển Dashboard hiển thị trực quan các chỉ số đo lường như: tổng số lượng sinh viên đang theo học, tổng số lớp học, số lượng môn học, điểm trung bình toàn trường và biểu đồ phân bổ học lực (Xuất sắc, Giỏi, Khá, Trung bình, Yếu). Hệ thống hỗ trợ cán bộ quản lý dễ dàng tìm kiếm nhanh sinh viên theo tên hoặc mã sinh viên, lọc sinh viên theo từng lớp học, nhập điểm quá trình (40%) và điểm thi (60%), từ đó tự động tính toán điểm tổng kết theo thang điểm 10 và quy đổi sang thang điểm chữ (A+, A, B+, B, C+, C, D+, D, F).
+  </p>
+  <p>
+    Đề tài được lựa chọn dựa trên danh mục đề tài thực hành môn <em>Triển khai và Quản trị Hệ thống Phần mềm</em>. Yêu cầu kỹ thuật riêng của Đề số 02 là: triển khai ứng dụng quản lý sinh viên (CRUD sinh viên, lớp, điểm số), cơ sở dữ liệu MySQL kết hợp công cụ quản lý phpMyAdmin. Đồng thời, toàn bộ hệ sinh thái phải tuân thủ nghiêm ngặt các yêu cầu chung về GitHub, Nginx reverse proxy, Prometheus/Grafana, Loki/LogQL, hardening và đóng gói đồng nhất bằng Docker Compose [1].
+  </p>
+
+  <h2 class="sub-title">1.2. Lý do chọn cách triển khai</h2>
+  <p>
+    Việc quản lý một hệ thống thông tin giáo dục đòi hỏi độ sẵn sàng cao, tính bảo mật dữ liệu và khả năng giám sát chặt chẽ. Thay vì cài đặt trực tiếp các phần mềm lên hệ điều hành máy chủ (dễ gây xung đột phiên bản, khó sao lưu và tiềm ẩn rủi ro lộ quyền quản trị), phương pháp triển khai bằng Docker Compose đem lại các lợi thế vượt trội:
+  </p>
+  <ul>
+    <li><strong>Tính độc lập và đóng gói (Isolation & Packaging):</strong> Mỗi dịch vụ (Web, MySQL, phpMyAdmin, Nginx, Prometheus, Grafana, Loki) chạy trong một container chuyên biệt với các thư viện độc lập.</li>
+    <li><strong>Phân tách mạng an toàn (Network Segmentation):</strong> Tách riêng mạng công cộng phục vụ người dùng bên ngoài (<code>frontend</code>) và mạng nội bộ chứa dữ liệu nhạy cảm (<code>backend</code>), giúp ngăn chặn việc truy cập trái phép vào cơ sở dữ liệu.</li>
+    <li><strong>Quan sát toàn diện (Observability):</strong> Tách biệt luồng xử lý nghiệp vụ với luồng giám sát. Prometheus và Promtail chủ động thu thập số liệu và log mà không làm suy giảm hiệu năng của ứng dụng web.</li>
+    <li><strong>Dễ dàng quản lý và tái lập (Reproducibility):</strong> Toàn bộ kiến trúc được mô tả tường minh trong file cấu hình <code>docker-compose.yml</code>, cho phép tái thiết lập hệ thống từ con số 0 chỉ với một câu lệnh duy nhất.</li>
+  </ul>
+  <p>
+    Trong quá trình thực hiện, dự án tuân thủ nguyên tắc triển khai theo từng mốc kiểm thử (Milestone) và commit định kỳ lên GitHub, giúp kiểm soát tốt các thay đổi cấu hình và dễ dàng truy vết sự cố.
+  </p>
+
+  <h2 class="sub-title">1.3. Mục tiêu</h2>
+  <ul>
+    <li>Xây dựng hoàn chỉnh ứng dụng Web Quản lý Sinh viên có đầy đủ dữ liệu sinh viên, lớp học, môn học, bảng điểm và dashboard thống kê.</li>
+    <li>Đóng gói và triển khai toàn bộ hệ thống bằng Docker Compose; bảo vệ dữ liệu MySQL bằng volume bền vững.</li>
+    <li>Cấu hình Nginx làm cổng tiếp nhận duy nhất, thiết lập chứng chỉ SSL/TLS tự ký phục vụ HTTPS, chuyển hướng HTTP sang HTTPS và bổ sung các Security Headers.</li>
+    <li>Tích hợp cụm công cụ giám sát Prometheus, MySQL Exporter, Node Exporter và cAdvisor; trực quan hóa số liệu qua Grafana Dashboard.</li>
+    <li>Thu thập nhật ký tập trung bằng Promtail, lưu trữ trong Loki và thực thi tối thiểu 2–3 truy vấn LogQL từ cơ bản đến chuyên sâu.</li>
+    <li>Thực hiện gia cố bảo mật (Hardening): chạy container với người dùng non-root, cô lập mạng nội bộ, giới hạn tài nguyên CPU/RAM, áp dụng nguyên tắc đặc quyền tối thiểu trong cơ sở dữ liệu và bảo mật file môi trường <code>.env</code>.</li>
+    <li>Quản lý mã nguồn theo phiên bản trên GitHub với tối thiểu 03 commit có ý nghĩa kỹ thuật rõ ràng và file README hướng dẫn chi tiết.</li>
+  </ul>
+
+  <h2 class="sub-title">1.4. Phạm vi</h2>
+  <p>
+    Báo cáo tập trung vào việc thiết kế, đóng gói và triển khai hệ thống trên máy chủ ảo hóa Linux Ubuntu Server 24.04 LTS (địa chỉ IP <code>192.168.253.129</code>). Hệ thống phục vụ mục tiêu học tập, thực hành và trình diễn nghiệp vụ trong phòng lab môn học. Chứng chỉ SSL được triển khai theo hình thức tự ký (Self-signed) cho IP máy chủ nội bộ.
+  </p>
+
+  <h2 class="sub-title">1.5. Phương pháp thực hiện</h2>
+  <p>
+    Quá trình triển khai được chia thành các bước có thứ tự logic:
+  </p>
+  <ol>
+    <li>Thiết kế cơ sở dữ liệu, viết mã nguồn ứng dụng Web Node.js/Express và kiểm thử API cục bộ.</li>
+    <li>Viết Dockerfile tối ưu (non-root), xây dựng file <code>docker-compose.yml</code> giai đoạn 1 (Web, MySQL, phpMyAdmin, Nginx) và đẩy Commit 1 lên GitHub.</li>
+    <li>Sinh chứng chỉ SSL tự ký, cấu hình Nginx reverse proxy và security headers.</li>
+    <li>Tích hợp Prometheus, MySQL Exporter, Node Exporter, cAdvisor và Grafana; xây dựng Dashboard trực quan và đẩy Commit 2 lên GitHub.</li>
+    <li>Tích hợp Loki và Promtail; thiết lập format log JSON, xây dựng dashboard log và thực thi các câu truy vấn LogQL.</li>
+    <li>Rà soát, áp dụng toàn bộ các giải pháp Hardening và hoàn thiện tài liệu README; đẩy Commit 3 lên GitHub.</li>
+    <li>Thu thập dữ liệu, kiểm tra tính đúng đắn và lập báo cáo thực hành tổng kết.</li>
+  </ol>
+
+  <h2 class="sub-title">1.6. Đối chiếu yêu cầu đề bài</h2>
+  <div class="caption">Bảng 1.1. Đối chiếu các nhóm yêu cầu và tiêu chí chấm điểm đề tài</div>
+  <table>
+    <tr>
+      <th style="width: 8%;">STT</th>
+      <th style="width: 25%;">Nhóm yêu cầu</th>
+      <th style="width: 42%;">Nội dung đánh giá theo đề</th>
+      <th style="width: 12%;">Điểm</th>
+      <th style="width: 13%;">Kết quả</th>
+    </tr>
+    <tr>
+      <td class="center">1</td>
+      <td><strong>Quản lý mã nguồn</strong></td>
+      <td>Repository đầy đủ, đặt tên theo mã SV (<code>de02_quanlysinhvien</code>), đủ 03 commit có ý nghĩa, README hướng dẫn.</td>
+      <td class="center">1.5</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td><strong>Ứng dụng + Database</strong></td>
+      <td>Ứng dụng chạy ổn định, kết nối MySQL thành công, có dữ liệu mẫu, phpMyAdmin hoạt động tốt.</td>
+      <td class="center">1.5</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td><strong>Nginx Reverse Proxy</strong></td>
+      <td>Cấu hình reverse proxy đúng, truy cập website qua Nginx (có HTTPS tự ký và security headers cơ bản).</td>
+      <td class="center">1.5</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td class="center">4</td>
+      <td><strong>Hệ thống giám sát</strong></td>
+      <td>Prometheus thu thập metrics (5/5 targets UP), Grafana có dashboard giám sát container / web / DB.</td>
+      <td class="center">1.5</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td class="center">5</td>
+      <td><strong>Log tập trung (Loki)</strong></td>
+      <td>Loki + Promtail hoạt động ổn định, truy vấn được log bằng LogQL (tối thiểu 2–3 query).</td>
+      <td class="center">1.5</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td class="center">6</td>
+      <td><strong>Hardening hệ thống</strong></td>
+      <td>Áp dụng ít nhất 3–4 biện pháp: non-root container, network isolation, mật khẩu mạnh, hạn chế quyền DB...</td>
+      <td class="center">1.5</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td class="center">7</td>
+      <td><strong>Tổng thể & Trình bày</strong></td>
+      <td>Hệ thống chạy hoàn chỉnh bằng docker-compose, demo rõ ràng, có screenshot minh chứng, hiểu bài.</td>
+      <td class="center">1.0</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- ================= CHƯƠNG 2 ================= -->
+  <h1 class="sec-title">CHƯƠNG 2. CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ SỬ DỤNG</h1>
+  
+  <h2 class="sub-title">2.1. Docker và Docker Compose</h2>
+  <p>
+    Docker là nền tảng ảo hóa ở cấp độ hệ điều hành (Containerization) cho phép lập trình viên đóng gói ứng dụng cùng các thư viện và cấu hình cần thiết thành một Container độc lập. So với máy ảo truyền thống (Virtual Machine), Docker chia sẻ chung nhân hệ điều hành (Kernel) của máy chủ host, nhờ đó giảm thiểu đáng kể thời gian khởi động ($< 1$ giây) và mức tiêu thụ tài nguyên phần cứng.
+  </p>
+  <p>
+    Docker Compose là công cụ điều phối đa container (Multi-container orchestration) thông qua tệp cấu hình duy nhất <code>docker-compose.yml</code>. Công cụ này cho phép thiết lập các thuộc tính quan trọng như: danh sách dịch vụ (services), phân vùng mạng (networks), vùng lưu trữ dữ liệu bền vững (volumes), biến môi trường (environment), ràng buộc phụ thuộc (depends_on) và giới hạn tài nguyên (resource limits) [2].
+  </p>
+
+  <h2 class="sub-title">2.2. Node.js và Express.js</h2>
+  <p>
+    Node.js là môi trường thực thi mã nguồn JavaScript phía máy chủ, xây dựng trên nền tảng V8 JavaScript Engine của Google Chrome. Với mô hình hướng sự kiện không đồng bộ và non-blocking I/O, Node.js mang lại hiệu năng xử lý các yêu cầu đồng thời (concurrency) rất cao. Express.js là framework tối giản và linh hoạt dành cho Node.js, cung cấp hệ thống định tuyến (routing) mạnh mẽ, các lớp middleware phục vụ tiền xử lý request, hỗ trợ CORS, phục vụ file tĩnh và xây dựng các chuẩn RESTful API. Trong dự án, ứng dụng còn tích hợp thư viện <code>prom-client</code> để tự sinh các số liệu đo lường định dạng Prometheus tại endpoint <code>/metrics</code>.
+  </p>
+
+  <h2 class="sub-title">2.3. MySQL 8.0 và phpMyAdmin</h2>
+  <p>
+    MySQL 8.0 là một trong những hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) mã nguồn mở phổ biến và ổn định nhất thế giới, sử dụng công cụ lưu trữ mặc định InnoDB hỗ trợ đầy đủ các tính chất ACID (Atomicity, Consistency, Isolation, Durability) và khóa ngoại (Foreign Keys). Bộ ký tự <code>utf8mb4</code> được áp dụng để hỗ trợ đầy đủ tiếng Việt có dấu. phpMyAdmin 5.2.1 là công cụ quản trị cơ sở dữ liệu dựa trên nền tảng Web viết bằng PHP, cung cấp giao diện trực quan để duyệt cấu trúc bảng, xem chỉ mục, thực thi truy vấn SQL và quản lý người dùng mà không cần dùng giao diện dòng lệnh.
+  </p>
+
+  <h2 class="sub-title">2.4. Nginx Reverse Proxy</h2>
+  <p>
+    Nginx là máy chủ web và reverse proxy hiệu năng cao, hoạt động theo cơ chế kiến trúc hướng sự kiện (asynchronous event-driven). Thay vì tạo luồng (thread) mới cho mỗi request, Nginx sử dụng một số lượng cố định các worker process để xử lý hàng chục nghìn kết nối đồng thời với dung lượng bộ nhớ cực kỳ tiết kiệm ($< 15\text{MB}$). Nginx đóng vai trò là điểm tiếp nhận duy nhất ở rìa hệ thống (Edge Gateway), thực hiện: tiếp nhận yêu cầu từ người dùng, giải mã mã hóa SSL/TLS, thêm các header bảo mật, định tuyến luồng dữ liệu tới các container backend thích hợp và ghi log truy cập chi tiết.
+  </p>
+
+  <h2 class="sub-title">2.5. Prometheus, Exporters và cAdvisor</h2>
+  <p>
+    Prometheus là dự án mã nguồn mở phục vụ giám sát và cảnh báo hệ thống, lưu trữ dữ liệu theo mô hình chuỗi thời gian (Time-series Data). Prometheus hoạt động theo cơ chế kéo (Pull model): định kỳ gửi request HTTP tới các endpoint <code>/metrics</code> của mục tiêu (Target) để thu thập dữ liệu đo lường. Các số liệu được gắn nhãn (Key-Value labels) đa chiều giúp việc lọc và tổng hợp dữ liệu trở nên linh hoạt thông qua ngôn ngữ truy vấn PromQL [6]. Các thành phần phụ trợ gồm:
+  </p>
+  <ul>
+    <li><strong>MySQL Exporter (<code>mysqld-exporter</code>):</strong> Thu thập số liệu hiệu năng của MySQL như số truy vấn trên giây, số kết nối, số luồng thực thi và truy vấn chậm.</li>
+    <li><strong>Node Exporter (<code>node-exporter</code>):</strong> Thu thập các chỉ số phần cứng và hệ điều hành của máy chủ như tỷ lệ sử dụng CPU, dung lượng bộ nhớ RAM, lưu lượng I/O ổ đĩa và băng thông mạng.</li>
+    <li><strong>cAdvisor (Container Advisor):</strong> Thu thập số liệu thời gian thực về việc sử dụng tài nguyên của từng Docker container (CPU, RAM, Network) từ hệ thống cgroup của Linux.</li>
+  </ul>
+
+  <h2 class="sub-title">2.6. Grafana</h2>
+  <p>
+    Grafana là nền tảng trực quan hóa và phân tích số liệu mã nguồn mở hàng đầu. Grafana kết nối trực tiếp với nhiều nguồn dữ liệu khác nhau (Datasources) bao gồm Prometheus và Loki. Người quản trị có thể tạo các bảng điều khiển (Dashboards) gồm nhiều dạng panel khác nhau (Time series graph, Stat, Gauge, Bar chart, Table, Log stream) nhằm theo dõi trực quan và phát hiện tức thì các điểm nghẽn hiệu năng của hệ thống [7].
+  </p>
+
+  <h2 class="sub-title">2.7. Loki, Promtail và LogQL</h2>
+  <p>
+    Grafana Loki là hệ thống quản trị và tập hợp log quy mô lớn, được thiết kế lấy cảm hứng từ Prometheus. Điểm khác biệt cốt lõi của Loki so với các hệ thống truyền thống (như Elasticsearch) là Loki không đánh chỉ mục (index) toàn bộ văn bản của log, mà chỉ đánh chỉ mục tập các nhãn metadata (như <code>container</code>, <code>job</code>, <code>level</code>). Điều này giúp Loki cực kỳ tiết kiệm bộ nhớ RAM và không gian lưu trữ ổ cứng. Promtail là agent thu gom log, đọc các dòng log từ Docker daemon hoặc file log của Nginx rồi gửi về endpoint của Loki thông qua HTTP. Người dùng sử dụng ngôn ngữ truy vấn LogQL để lọc, phân tích và thống kê log theo thời gian thực [8].
+  </p>
+
+  <h2 class="sub-title">2.8. Hardening cơ bản trong môi trường container</h2>
+  <p>
+    Gia cố hệ thống (Hardening) là tập hợp các biện pháp kỹ thuật nhằm giảm thiểu tối đa bề mặt tấn công (Attack Surface). Trong môi trường Docker container, các nguyên tắc thực hành tốt nhất bao gồm: không chạy tiến trình dưới quyền <code>root</code>, phân chia mạng theo vùng bảo vệ (Network Isolation), không phơi bày cổng cơ sở dữ liệu ra bên ngoài, áp dụng nguyên tắc phân quyền tối thiểu (Least Privilege), ẩn các thông tin phiên bản phần mềm, cấu hình Security Headers và giới hạn hạn mức tài nguyên phần cứng để phòng chống tấn công từ chối dịch vụ (DoS).
+  </p>
+
+  <div class="caption">Bảng 2.1. Vai trò các công nghệ sử dụng trong hệ thống</div>
+  <table>
+    <tr>
+      <th style="width: 8%;">STT</th>
+      <th style="width: 25%;">Công nghệ</th>
+      <th style="width: 18%;">Phiên bản</th>
+      <th style="width: 49%;">Vai trò trong hệ thống Đề tài 02</th>
+    </tr>
+    <tr>
+      <td class="center">1</td>
+      <td><strong>Node.js / Express</strong></td>
+      <td>18.x Alpine</td>
+      <td>Xử lý API CRUD sinh viên, phục vụ giao diện, sinh Prometheus metrics và log JSON</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td><strong>MySQL</strong></td>
+      <td>8.0 Community</td>
+      <td>Lưu trữ dữ liệu quan hệ (sinh viên, lớp học, môn học, điểm số)</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td><strong>phpMyAdmin</strong></td>
+      <td>5.2.1 Apache</td>
+      <td>Giao diện đồ họa hỗ trợ kiểm tra và quản trị CSDL MySQL</td>
+    </tr>
+    <tr>
+      <td class="center">4</td>
+      <td><strong>Nginx</strong></td>
+      <td>1.25 Alpine</td>
+      <td>Reverse proxy, mã hóa SSL/TLS, chuyển hướng HTTP 301 và cấu hình Security Headers</td>
+    </tr>
+    <tr>
+      <td class="center">5</td>
+      <td><strong>Prometheus</strong></td>
+      <td>v2.51.0</td>
+      <td>Thu thập và lưu trữ time-series metrics định kỳ 5 giây/lần</td>
+    </tr>
+    <tr>
+      <td class="center">6</td>
+      <td><strong>Grafana</strong></td>
+      <td>10.4.1</td>
+      <td>Trực quan hóa số liệu qua các Dashboard và cung cấp môi trường Explore</td>
+    </tr>
+    <tr>
+      <td class="center">7</td>
+      <td><strong>MySQL Exporter</strong></td>
+      <td>v0.15.1</td>
+      <td>Trích xuất các chỉ số vận hành nội bộ của MySQL sang chuẩn Prometheus</td>
+    </tr>
+    <tr>
+      <td class="center">8</td>
+      <td><strong>Node Exporter</strong></td>
+      <td>v1.7.0</td>
+      <td>Trích xuất các chỉ số phần cứng (CPU, RAM, Disk) của máy chủ host</td>
+    </tr>
+    <tr>
+      <td class="center">9</td>
+      <td><strong>cAdvisor</strong></td>
+      <td>v0.47.2</td>
+      <td>Thu thập chỉ số tài nguyên tiêu thụ của từng container Docker</td>
+    </tr>
+    <tr>
+      <td class="center">10</td>
+      <td><strong>Grafana Loki</strong></td>
+      <td>2.9.2</td>
+      <td>Lưu trữ nhật ký tập trung và hỗ trợ truy vấn LogQL</td>
+    </tr>
+    <tr>
+      <td class="center">11</td>
+      <td><strong>Promtail</strong></td>
+      <td>2.9.2</td>
+      <td>Đại lý thu gom log container qua Docker socket và đẩy về Loki</td>
+    </tr>
+    <tr>
+      <td class="center">12</td>
+      <td><strong>Git / GitHub</strong></td>
+      <td>2.53.0</td>
+      <td>Quản lý phiên bản mã nguồn, ghi nhận 03 mốc commit theo quy trình</td>
+    </tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- ================= CHƯƠNG 3 ================= -->
+  <h1 class="sec-title">CHƯƠNG 3. PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG</h1>
+  
+  <h2 class="sub-title">3.1. Phân tích yêu cầu chức năng</h2>
+  <div class="caption">Bảng 3.1. Danh mục yêu cầu chức năng chính</div>
+  <table>
+    <tr>
+      <th style="width: 12%;">Mã</th>
+      <th style="width: 30%;">Tên chức năng</th>
+      <th style="width: 43%;">Mô tả nghiệp vụ</th>
+      <th style="width: 15%;">Endpoint</th>
+    </tr>
+    <tr>
+      <td class="center">F01</td>
+      <td>Thống kê Dashboard</td>
+      <td>Hiển thị tổng số sinh viên, tổng số lớp, số môn đào tạo, điểm trung bình GPA và biểu đồ phân bổ học lực</td>
+      <td><code>GET /api/stats</code></td>
+    </tr>
+    <tr>
+      <td class="center">F02</td>
+      <td>Xem danh sách SV</td>
+      <td>Trả về danh sách sinh viên kèm thông tin lớp; hỗ trợ tìm kiếm theo tên/mã và lọc theo lớp</td>
+      <td><code>GET /api/students</code></td>
+    </tr>
+    <tr>
+      <td class="center">F03</td>
+      <td>Thêm mới sinh viên</td>
+      <td>Thêm hồ sơ sinh viên mới; kiểm tra trùng lặp mã sinh viên và định dạng email</td>
+      <td><code>POST /api/students</code></td>
+    </tr>
+    <tr>
+      <td class="center">F04</td>
+      <td>Cập nhật sinh viên</td>
+      <td>Chỉnh sửa thông tin họ tên, ngày sinh, giới tính, email, số điện thoại hoặc chuyển lớp</td>
+      <td><code>PUT /api/students/:id</code></td>
+    </tr>
+    <tr>
+      <td class="center">F05</td>
+      <td>Xóa sinh viên</td>
+      <td>Xóa hồ sơ sinh viên khỏi hệ thống (có thông báo xác nhận an toàn)</td>
+      <td><code>DELETE /api/students/:id</code></td>
+    </tr>
+    <tr>
+      <td class="center">F06</td>
+      <td>Quản lý Lớp học</td>
+      <td>Xem danh sách lớp kèm sĩ số tự động, thêm lớp mới, sửa thông tin và xóa lớp</td>
+      <td><code>/api/classes</code></td>
+    </tr>
+    <tr>
+      <td class="center">F07</td>
+      <td>Quản lý Môn học</td>
+      <td>Xem danh sách các môn đào tạo và số tín chỉ</td>
+      <td><code>GET /api/courses</code></td>
+    </tr>
+    <tr>
+      <td class="center">F08</td>
+      <td>Quản lý Điểm số</td>
+      <td>Nhập điểm QT (40%), điểm thi (60%), tự động tính điểm tổng kết và quy đổi điểm chữ</td>
+      <td><code>/api/grades</code></td>
+    </tr>
+    <tr>
+      <td class="center">F09</td>
+      <td>Quản trị CSDL</td>
+      <td>Truy cập giao diện quản trị phpMyAdmin để quản lý bảng, view, user</td>
+      <td><code>/phpmyadmin/</code></td>
+    </tr>
+    <tr>
+      <td class="center">F10</td>
+      <td>Kiểm tra vận hành</td>
+      <td>Endpoint trạng thái kết nối DB và dữ liệu đo lường chuẩn Prometheus</td>
+      <td><code>/health</code>, <code>/metrics</code></td>
+    </tr>
+  </table>
+
+  <h2 class="sub-title">3.2. Yêu cầu phi chức năng</h2>
+  <p>
+    Hệ thống được thiết kế đáp ứng các tiêu chuẩn sản xuất nghiêm ngặt:
+  </p>
+  <ul>
+    <li><strong>Tính sẵn sàng và tự phục hồi:</strong> Tất cả các container được cấu hình chính sách <code>restart: unless-stopped</code>, tự động khởi động lại khi máy chủ reboot hoặc tiến trình gặp sự cố đột ngột.</li>
+    <li><strong>Tính toàn vẹn dữ liệu:</strong> Dữ liệu MySQL được lưu trữ trong Docker Volume độc lập (<code>mysql_data</code>), đảm bảo không bị mất khi container bị recreate.</li>
+    <li><strong>Bảo mật mạng:</strong> Không công khai cổng cơ sở dữ liệu ra ngoài máy chủ host. Toàn bộ lưu lượng web bên ngoài bắt buộc đi qua Nginx Reverse Proxy có mã hóa HTTPS.</li>
+    <li><strong>Hiệu năng và kiểm soát tài nguyên:</strong> Thiết lập giới hạn trần CPU và RAM cho từng container, ngăn ngừa tình trạng một dịch vụ chiếm dụng toàn bộ tài nguyên máy chủ gây sập hệ thống.</li>
+    <li><strong>Khả năng quan sát:</strong> Toàn bộ lưu lượng HTTP, số lượng sinh viên, trạng thái database và nhật ký ứng dụng phải được giám sát theo thời gian thực.</li>
+  </ul>
+
+  <h2 class="sub-title">3.3. Kiến trúc tổng thể</h2>
+  <p>
+    Kiến trúc hệ thống được phân tách thành 3 tầng logic rõ rệt: Tầng biên (Edge Gateway - Nginx), Tầng nghiệp vụ (Application & Database) và Tầng giám sát quản trị (Monitoring & Logging).
+  </p>
+  <pre>
+[ NGƯỜI DÙNG / TRÌNH DUYỆT ]
+           │
+           │ (HTTP:80 -> Chuyển hướng 301 / HTTPS:443)
+           ▼
+┌────────────────────────────────────────────────────────┐
+│               NGINX REVERSE PROXY                      │
+│        (Mã hóa TLS 1.2/1.3, Security Headers)          │
+└──────────┬───────────────────────────────┬─────────────┘
+           │                               │
+    (proxy_pass /)               (proxy_pass /phpmyadmin/)
+           │                               │
+           ▼                               ▼
+┌─────────────────────────┐     ┌────────────────────────┐
+│  QLSV WEB APPLICATION   │     │      PHPMYADMIN        │
+│  (Node.js 18 - Port 3000)│    │      (Port 80)         │
+│  User: node (UID 1000)  │     └──────────┬─────────────┘
+└──────────┬──────────────┘                │
+           │                               │
+           │ (SQL Queries)                 │ (DB Admin)
+           ▼                               ▼
+┌────────────────────────────────────────────────────────┐
+│                 MYSQL 8.0 DATABASE                     │
+│         (Internal Port 3306 - Không mở ra host)        │
+│         User phân quyền hạn chế: student_user          │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                           │ Scrape số liệu DB
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│            HỆ THỐNG GIÁM SÁT & QUẢN TRỊ LOG            │
+│  ┌───────────────────┐  ┌───────────────────────────┐  │
+│  │    PROMETHEUS     │  │          GRAFANA          │  │
+│  │    (Port 9090)    │  │        (Port 3000)        │  │
+│  └─────────▲─────────┘  └──────────────▲────────────┘  │
+│            │ Scrape metrics            │ Truy vấn      │
+│  ┌─────────┴─────────┐                 │ metrics/logs  │
+│  │   CÁC EXPORTERS   │                 │               │
+│  │ - mysqld-exporter │                 │               │
+│  │ - node-exporter   │  ┌──────────────┴────────────┐  │
+│  │ - cAdvisor        │  │       GRAFANA LOKI        │  │
+│  │ - app (/metrics)  │  │        (Port 3100)        │  │
+│  └───────────────────┘  └──────────────▲────────────┘  │
+│                                        │ Đẩy log       │
+│                         ┌──────────────┴────────────┐  │
+│                         │         PROMTAIL          │  │
+│                         │  (Docker sock + Nginx log)│  │
+│                         └───────────────────────────┘  │
+└────────────────────────────────────────────────────────┘
+  </pre>
+  <div class="caption">Hình 3.1. Kiến trúc logic của Hệ thống Quản lý Sinh viên</div>
+
+  <h2 class="sub-title">3.4. Thiết kế dữ liệu</h2>
+  <p>
+    Cơ sở dữ liệu <code>qlsinhvien</code> bao gồm 4 bảng dữ liệu chính, được thiết lập khóa chính tự tăng và các ràng buộc khóa ngoại đảm bảo tính toàn vẹn tham chiếu:
+  </p>
+  <pre>
+  ┌──────────────────┐               ┌──────────────────┐
+  │     CLASSES      │               │     COURSES      │
+  ├──────────────────┤               ├──────────────────┤
+  │ id (PK)          │               │ id (PK)          │
+  │ class_code (UK)  │               │ course_code (UK) │
+  │ class_name       │               │ course_name      │
+  │ faculty          │               │ credits          │
+  │ academic_year    │               │ created_at       │
+  └────────┬─────────┘               └────────┬─────────┘
+           │ 1                                │ 1
+           │                                  │
+           │ n                                │ n
+  ┌────────▼─────────┐               ┌────────▼─────────┐
+  │     STUDENTS     │ 1           n │      GRADES      │
+  ├──────────────────┼───────────────┤──────────────────┤
+  │ id (PK)          │               │ id (PK)          │
+  │ student_code (UK)│               │ student_id (FK)  │
+  │ full_name        │               │ course_id (FK)   │
+  │ date_of_birth    │               │ process_score    │
+  │ gender           │               │ exam_score       │
+  │ email (UK)       │               │ final_score      │
+  │ phone            │               │ letter_grade     │
+  │ class_id (FK)    │               │ updated_at       │
+  └──────────────────┘               └──────────────────┘
+  </pre>
+  <div class="caption">Hình 3.2. Mô hình quan hệ thực thể (ERD) dữ liệu sinh viên rút gọn</div>
+
+  <div class="caption">Bảng 3.2. Các bảng dữ liệu chính trong cơ sở dữ liệu qlsinhvien</div>
+  <table>
+    <tr>
+      <th style="width: 15%;">Tên bảng</th>
+      <th style="width: 35%;">Các trường dữ liệu chính</th>
+      <th style="width: 25%;">Ràng buộc khóa</th>
+      <th style="width: 25%;">Ý nghĩa nghiệp vụ</th>
+    </tr>
+    <tr>
+      <td><code>classes</code></td>
+      <td><code>id, class_code, class_name, faculty, academic_year</code></td>
+      <td>PK: <code>id</code><br>UK: <code>class_code</code></td>
+      <td>Lưu thông tin các lớp sinh hoạt chuyên ngành</td>
+    </tr>
+    <tr>
+      <td><code>students</code></td>
+      <td><code>id, student_code, full_name, date_of_birth, gender, email, phone, class_id</code></td>
+      <td>PK: <code>id</code><br>UK: <code>student_code, email</code><br>FK: <code>class_id -> classes(id)</code></td>
+      <td>Lưu hồ sơ cá nhân và phân lớp của sinh viên</td>
+    </tr>
+    <tr>
+      <td><code>courses</code></td>
+      <td><code>id, course_code, course_name, credits</code></td>
+      <td>PK: <code>id</code><br>UK: <code>course_code</code></td>
+      <td>Lưu danh mục các học phần đào tạo và tín chỉ</td>
+    </tr>
+    <tr>
+      <td><code>grades</code></td>
+      <td><code>id, student_id, course_id, process_score, exam_score, final_score, letter_grade</code></td>
+      <td>PK: <code>id</code><br>UK: <code>(student_id, course_id)</code><br>FK: <code>student_id, course_id</code></td>
+      <td>Lưu bảng điểm; <code>final_score</code> tự động sinh từ điểm QT và điểm thi</td>
+    </tr>
+  </table>
+
+  <h2 class="sub-title">3.5. Quy trình nghiệp vụ hệ thống</h2>
+  <h3 class="sub-sub-title">3.5.1. Quản lý hồ sơ sinh viên và kiểm tra trùng lặp</h3>
+  <p>
+    Khi người dùng thêm sinh viên mới qua API <code>POST /api/students</code>, hệ thống thực hiện kiểm tra tính hợp lệ của dữ liệu đầu vào: các trường bắt buộc (Mã sinh viên, Họ và tên, Email), định dạng ngày sinh và cấu trúc email. Nhờ ràng buộc <code>UNIQUE</code> trên hai cột <code>student_code</code> và <code>email</code>, cơ sở dữ liệu ngăn chặn triệt để tình trạng cấp trùng mã số hoặc sử dụng trùng email. Khi một sinh viên bị xóa, các bản ghi điểm tương ứng trong bảng <code>grades</code> sẽ tự động bị xóa theo nhờ quy tắc <code>ON DELETE CASCADE</code>.
+  </p>
+
+  <h3 class="sub-sub-title">3.5.2. Quản lý lớp học và tính sĩ số tự động</h3>
+  <p>
+    Hệ thống quản lý thông tin các lớp sinh hoạt chuyên ngành. Truy vấn <code>GET /api/classes</code> sử dụng phép kết nối <code>LEFT JOIN</code> giữa bảng <code>classes</code> và <code>students</code> kết hợp hàm gom nhóm <code>COUNT(s.id)</code> để tự động tính toán chính xác sĩ số sinh viên hiện có trong từng lớp mà không cần lưu trữ trường sĩ số tĩnh, loại bỏ nguy cơ sai lệch dữ liệu.
+  </p>
+
+  <h3 class="sub-sub-title">3.5.3. Nhập điểm, tính điểm tổng kết và xếp loại học lực</h3>
+  <p>
+    Khi nhập hoặc sửa điểm cho sinh viên qua <code>POST /api/grades</code>, hệ thống tiếp nhận điểm quá trình ($P$) và điểm thi ($E$). Điểm tổng kết hệ 10 được tính toán theo công thức: $\text{Điểm TK} = \text{round}(P \times 0.4 + E \times 0.6, 2)$. Sau đó, ứng dụng tự động phân loại thang điểm chữ và học lực tương ứng (A+ Xuất sắc, A Giỏi, B+ Khá giỏi, B Khá, C+ TB Khá, C TB, D+ TB Yếu, D Yếu, F Kém). Cơ chế <code>ON DUPLICATE KEY UPDATE</code> cho phép tự động cập nhật bản ghi nếu sinh viên đã có điểm môn học đó.
+  </p>
+
+  <h3 class="sub-sub-title">3.5.4. Tra cứu, tìm kiếm thời gian thực và phân loại sinh viên</h3>
+  <p>
+    Giao diện người dùng tích hợp hàm <code>debounce</code> trì hoãn 300ms trong ô tìm kiếm. Khi người dùng nhập bất kỳ ký tự nào, ứng dụng tự động gửi truy vấn <code>GET /api/students?search=...</code> để lọc tức thời theo Mã sinh viên hoặc Họ tên. Bộ lọc lớp học cho phép hiển thị danh sách sinh viên theo từng lớp chuyên ngành cụ thể.
+  </p>
+
+  <h3 class="sub-sub-title">3.5.5. Phân quyền và bảo vệ cơ sở dữ liệu</h3>
+  <p>
+    Ứng dụng Web hoàn toàn không sử dụng tài khoản <code>root</code> của MySQL. Trong file <code>database/init.sql</code>, một tài khoản riêng biệt mang tên <code>student_user</code> được khởi tạo và chỉ được cấp phát nhóm quyền thao tác dữ liệu:
+  </p>
+  <pre>
+CREATE USER IF NOT EXISTS 'student_user'@'%' IDENTIFIED BY 'StudentPass_2026!Sec';
+GRANT SELECT, INSERT, UPDATE, DELETE ON qlsinhvien.* TO 'student_user'@'%';
+FLUSH PRIVILEGES;
+  </pre>
+  <p>
+    Tài khoản này bị từ chối mọi đặc quyền quản trị cấp cao như <code>DROP DATABASE</code>, <code>ALTER TABLE</code>, <code>GRANT OPTION</code> hay các quyền truy cập vào schema hệ thống của MySQL.
+  </p>
+
+  <h2 class="sub-title">3.6. Thiết kế network và cổng</h2>
+  <div class="caption">Bảng 3.3. Phân tách network, container và cổng truy cập dịch vụ</div>
+  <table>
+    <tr>
+      <th style="width: 25%;">Tên Container</th>
+      <th style="width: 35%;">Mạng phân vùng Docker</th>
+      <th style="width: 18%;">Cổng Host</th>
+      <th style="width: 22%;">Ghi chú bảo mật</th>
+    </tr>
+    <tr>
+      <td><code>qlsv_nginx</code></td>
+      <td><code>frontend_net, backend_net, monitoring_net</code></td>
+      <td class="center">80, 443</td>
+      <td>Cổng tiếp nhận duy nhất từ người dùng</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_app</code></td>
+      <td><code>backend_net, monitoring_net</code></td>
+      <td class="center">Không</td>
+      <td>Chỉ nhận request proxy từ Nginx; không mở 3000</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_mysql</code></td>
+      <td><code>backend_net</code></td>
+      <td class="center">Không</td>
+      <td>Mạng cô lập nội bộ; chặn quét port 3306</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_phpmyadmin</code></td>
+      <td><code>backend_net</code></td>
+      <td class="center">Không</td>
+      <td>Nginx định tuyến qua <code>/phpmyadmin/</code></td>
+    </tr>
+    <tr>
+      <td><code>qlsv_prometheus</code></td>
+      <td><code>monitoring_net, backend_net</code></td>
+      <td class="center">9090</td>
+      <td>Thu thập chỉ số và phục vụ API PromQL</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_grafana</code></td>
+      <td><code>monitoring_net</code></td>
+      <td class="center">3000</td>
+      <td>Giao diện hiển thị Dashboard và Explore</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_loki</code></td>
+      <td><code>monitoring_net</code></td>
+      <td class="center">3100</td>
+      <td>Tiếp nhận log từ Promtail và phục vụ LogQL</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_promtail</code></td>
+      <td><code>monitoring_net</code></td>
+      <td class="center">Không</td>
+      <td>Đọc Docker socket và gửi log tới Loki</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_mysqld_exporter</code></td>
+      <td><code>backend_net, monitoring_net</code></td>
+      <td class="center">Không (9104)</td>
+      <td>Xuất metric MySQL cho Prometheus</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_node_exporter</code></td>
+      <td><code>monitoring_net</code></td>
+      <td class="center">Không (9100)</td>
+      <td>Xuất metric tài nguyên máy chủ host</td>
+    </tr>
+    <tr>
+      <td><code>qlsv_cadvisor</code></td>
+      <td><code>monitoring_net</code></td>
+      <td class="center">Không (8080)</td>
+      <td>Xuất metric chi tiết từng container Docker</td>
+    </tr>
+  </table>
+
+  <div class="page-break"></div>
+
+  <!-- ================= CHƯƠNG 4 ================= -->
+  <h1 class="sec-title">CHƯƠNG 4. XÂY DỰNG VÀ TRIỂN KHAI</h1>
+  
+  <h2 class="sub-title">4.1. Môi trường thực hiện</h2>
+  <p>
+    Hệ thống được phát triển, đóng gói và vận hành thực nghiệm trên máy chủ ảo:
+  </p>
+  <ul>
+    <li><strong>Hệ điều hành:</strong> Linux Ubuntu Server 24.04 LTS (x86_64).</li>
+    <li><strong>Địa chỉ mạng:</strong> IP <code>192.168.253.129</code> (VMware Network Adapter VMnet8).</li>
+    <li><strong>Tài nguyên máy ảo:</strong> 4 vCPU, 5.2 GB RAM, 20 GB Ổ cứng ảo.</li>
+    <li><strong>Phần mềm hạ tầng:</strong> Docker version 29.1.3, Docker Compose version v5.5.0, Git version 2.53.0, OpenSSL 3.0.</li>
+    <li><strong>Thư mục làm việc trên máy chủ:</strong> <code>/home/ubuntu/de02_quanlysinhvien</code>.</li>
+    <li><strong>Thư mục đồng bộ máy phát triển:</strong> <code>d:\trienkhaiphanmem</code>.</li>
+  </ul>
+
+  <h2 class="sub-title">4.2. Triển khai bằng Docker Compose</h2>
+  <div class="caption">Bảng 4.1. Danh sách 11 services điều phối trong Docker Compose</div>
+  <table>
+    <tr>
+      <th style="width: 8%;">STT</th>
+      <th style="width: 20%;">Service Name</th>
+      <th style="width: 25%;">Container Name</th>
+      <th style="width: 30%;">Base Image sử dụng</th>
+      <th style="width: 17%;">Chính sách Restart</th>
+    </tr>
+    <tr>
+      <td class="center">1</td>
+      <td><code>db</code></td>
+      <td><code>qlsv_mysql</code></td>
+      <td><code>mysql:8.0</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">2</td>
+      <td><code>app</code></td>
+      <td><code>qlsv_app</code></td>
+      <td>Build từ <code>app/Dockerfile</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">3</td>
+      <td><code>phpmyadmin</code></td>
+      <td><code>qlsv_phpmyadmin</code></td>
+      <td><code>phpmyadmin:5.2.1-apache</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">4</td>
+      <td><code>nginx</code></td>
+      <td><code>qlsv_nginx</code></td>
+      <td><code>nginx:1.25-alpine</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">5</td>
+      <td><code>prometheus</code></td>
+      <td><code>qlsv_prometheus</code></td>
+      <td><code>prom/prometheus:v2.51.0</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">6</td>
+      <td><code>grafana</code></td>
+      <td><code>qlsv_grafana</code></td>
+      <td><code>grafana/grafana:10.4.1</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">7</td>
+      <td><code>mysqld-exporter</code></td>
+      <td><code>qlsv_mysqld_exporter</code></td>
+      <td><code>prom/mysqld-exporter:v0.15.1</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">8</td>
+      <td><code>node-exporter</code></td>
+      <td><code>qlsv_node_exporter</code></td>
+      <td><code>prom/node-exporter:v1.7.0</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">9</td>
+      <td><code>cadvisor</code></td>
+      <td><code>qlsv_cadvisor</code></td>
+      <td><code>gcr.io/cadvisor/cadvisor:v0.47.2</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">10</td>
+      <td><code>loki</code></td>
+      <td><code>qlsv_loki</code></td>
+      <td><code>grafana/loki:2.9.2</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+    <tr>
+      <td class="center">11</td>
+      <td><code>promtail</code></td>
+      <td><code>qlsv_promtail</code></td>
+      <td><code>grafana/promtail:2.9.2</code></td>
+      <td class="center">unless-stopped</td>
+    </tr>
+  </table>
+
+  <pre>
+$ docker compose ps
+NAME                   IMAGE                              STATUS                   PORTS
+qlsv_app               de02_quanlysinhvien-app            Up (healthy)             3000/tcp
+qlsv_cadvisor          gcr.io/cadvisor/cadvisor:v0.47.2   Up (healthy)             8080/tcp
+qlsv_grafana           grafana/grafana:10.4.1             Up                       0.0.0.0:3000->3000/tcp
+qlsv_loki              grafana/loki:2.9.2                 Up                       0.0.0.0:3100->3100/tcp
+qlsv_mysql             mysql:8.0                          Up (healthy)             3306/tcp, 33060/tcp
+qlsv_mysqld_exporter   prom/mysqld-exporter:v0.15.1       Up                       9104/tcp
+qlsv_nginx             nginx:1.25-alpine                  Up                       0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp
+qlsv_node_exporter     prom/node-exporter:v1.7.0          Up                       9100/tcp
+qlsv_phpmyadmin        phpmyadmin:5.2.1-apache            Up                       80/tcp
+qlsv_prometheus        prom/prometheus:v2.51.0            Up                       0.0.0.0:9090->9090/tcp
+qlsv_promtail          grafana/promtail:2.9.2             Up
+  </pre>
+  <div class="caption">Hình 4.1. Trạng thái toàn bộ 11 container đang hoạt động trong Docker Compose</div>
+
+  <h2 class="sub-title">4.3. Xây dựng chức năng Student Management System</h2>
+  <h3 class="sub-sub-title">4.3.1. Giao diện trang chủ và Dashboard thống kê</h3>
+  <p>
+    Giao diện ứng dụng được thiết kế trên nền tảng Bootstrap 5.3 hiện đại, tông màu xanh chuyên nghiệp, hỗ trợ responsive hoàn toàn trên máy tính và điện thoại. Thanh điều hướng đầu trang hiển thị tên hệ thống, huy hiệu MSSV <code>DTC245200257</code>, trạng thái kết nối trực tiếp với MySQL và các tab chuyển hướng nhanh.
+  </p>
+  <p>
+    Tại tab Dashboard: 4 thẻ thống kê hiển thị số lượng 11 sinh viên, 4 lớp học, 4 môn học và điểm trung bình toàn trường 7.85; biểu đồ Doughnut phân bổ xếp loại học lực gồm 3 Xuất sắc, 5 Giỏi, 6 Khá, 2 Trung bình; danh sách Top 5 sinh viên tiêu biểu đứng đầu là sinh viên Bùi Lan Anh và sinh viên Lương Hải Anh.
+  </p>
+  <div class="caption">Hình 4.2. Giao diện Dashboard phân tích học lực và thống kê của hệ thống</div>
+
+  <h3 class="sub-sub-title">4.3.2. Giao diện quản lý sinh viên, lớp học và điểm số</h3>
+  <p>
+    <strong>Tab Quản lý Sinh viên:</strong> Bảng dữ liệu hiển thị chi tiết các cột: Mã SV, Họ và tên, Ngày sinh, Giới tính, Lớp chuyên ngành, Email, Số điện thoại và cột Thao tác (Sửa/Xóa). Hộp thoại Modal cho phép thêm mới hoặc cập nhật hồ sơ với đầy đủ kiểm tra dữ liệu.
+  </p>
+  <p>
+    <strong>Tab Quản lý Lớp học:</strong> Liệt kê các lớp học cùng sĩ số được tính toán động (VD: lớp CNTT-K18A có 3 SV, CNTT-K18B có 3 SV, KTPM-K18 có 3 SV, HTTT-K18 có 2 SV).
+  </p>
+  <p>
+    <strong>Tab Quản lý Điểm số:</strong> Hiển thị điểm quá trình (40%), điểm thi (60%), điểm tổng kết và huy hiệu xếp loại chữ trực quan theo màu sắc (A+ màu xanh lá, B+ màu xanh dương, C+ màu cyan).
+  </p>
+  <div class="caption">Hình 4.3. Giao diện bảng danh sách sinh viên và hộp thoại thêm mới</div>
+  <div class="caption">Hình 4.4. Giao diện quản lý lớp học và bảng điểm học phần</div>
+
+  <h2 class="sub-title">4.4. MySQL và phpMyAdmin</h2>
+  <p>
+    Cơ sở dữ liệu <code>qlsinhvien</code> được khởi tạo tự động nhờ cơ chế nạp file <code>database/init.sql</code>. phpMyAdmin được định tuyến an toàn qua Nginx tại đường dẫn <code>https://192.168.253.129/phpmyadmin/</code>.
+  </p>
+  <pre>
+SELECT s.student_code, s.full_name, c.class_name, co.course_name, g.process_score, g.exam_score, g.final_score, g.letter_grade
+FROM grades g
+JOIN students s ON g.student_id = s.id
+JOIN classes c ON s.class_id = c.id
+JOIN courses co ON g.course_id = co.id
+ORDER BY g.final_score DESC;
+  </pre>
+  <div class="caption">Hình 4.5. Truy vấn kiểm tra dữ liệu và quyền truy cập trong phpMyAdmin</div>
+
+  <h2 class="sub-title">4.5. Nginx Reverse Proxy và security headers</h2>
+  <p>
+    Tệp cấu hình <code>nginx/nginx.conf</code> thiết lập lắng nghe đồng thời cổng 80 và 443:
+  </p>
+  <ul>
+    <li>Toàn bộ truy cập cổng 80 tự động nhận mã chuyển hướng <code>301 Moved Permanently</code> sang <code>https://$host$request_uri</code>.</li>
+    <li>Chứng chỉ SSL tự ký được tải qua đường dẫn <code>/etc/nginx/ssl/server.crt</code> và <code>/etc/nginx/ssl/server.key</code>.</li>
+    <li>Tích hợp đầy đủ các Security Headers: HSTS, X-Frame-Options, X-Content-Type-Options, X-XSS-Protection, Referrer-Policy, ẩn phiên bản Nginx.</li>
+  </ul>
+  <pre>
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name localhost 192.168.253.129;
+
+    ssl_certificate     /etc/nginx/ssl/server.crt;
+    ssl_certificate_key /etc/nginx/ssl/server.key;
+    ssl_protocols       TLSv1.2 TLSv1.3;
+
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    server_tokens off;
+
+    location / {
+        proxy_pass http://app:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location /phpmyadmin/ {
+        proxy_pass http://phpmyadmin:80/;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+  </pre>
+  <div class="caption">Hình 4.6. Kiểm tra Nginx reverse proxy, HTTPS tự ký và các Security Headers</div>
+
+  <h2 class="sub-title">4.6. Prometheus và Grafana</h2>
+  <h3 class="sub-sub-title">4.6.1. Cấu hình scrape Prometheus</h3>
+  <p>
+    Tệp <code>prometheus/prometheus.yml</code> cấu hình chu kỳ lấy mẫu 5 giây (<code>scrape_interval: 5s</code>), khai báo đầy đủ 5 Jobs: <code>prometheus</code> (9090), <code>qlsv_app</code> (3000), <code>mysql</code> (9104), <code>node_exporter</code> (9100) và <code>cadvisor</code> (8080).
+  </p>
+  <pre>
+$ curl -s http://192.168.253.129:9090/api/v1/targets | jq '.data.activeTargets[] | {job: .labels.job, health: .health}'
+{ "job": "cadvisor", "health": "up" }
+{ "job": "mysql", "health": "up" }
+{ "job": "node_exporter", "health": "up" }
+{ "job": "prometheus", "health": "up" }
+{ "job": "qlsv_app", "health": "up" }
+  </pre>
+  <div class="caption">Hình 4.7. Danh sách Prometheus Targets với 5/5 endpoint đều UP</div>
+
+  <h3 class="sub-sub-title">4.6.2. Dashboard Grafana</h3>
+  <p>
+    Grafana sử dụng cơ chế nạp tự động (Auto-provisioning) thông qua các file định nghĩa trong <code>grafana/provisioning/</code>. Hai Dashboard chính được nạp vào thư mục <strong>QLSV Monitoring</strong>:
+  </p>
+  <ul>
+    <li><strong>Hệ thống Quản lý Sinh viên - Giám sát Toàn diện:</strong> Stat tổng sinh viên (<code>qlsv_total_students</code>), tổng lớp học (<code>qlsv_total_classes</code>); Time series tốc độ request (RPS), độ trễ phân vị p50/p95, MySQL QPS, Threads connected, CPU và RAM.</li>
+    <li><strong>Hệ thống Quản lý Sinh viên - Log Tập trung (Loki & LogQL):</strong> Trực quan hóa nhật ký dòng thời gian thực.</li>
+  </ul>
+  <div class="caption">Hình 4.8. Dashboard Grafana giám sát ứng dụng, MySQL và tài nguyên container</div>
+
+  <h2 class="sub-title">4.7. Loki và Promtail</h2>
+  <p>
+    Promtail kết nối trực tiếp với Docker Daemon qua socket <code>/var/run/docker.sock</code> để tự động đọc log từ mọi container. Nginx ghi access log định dạng JSON có cấu trúc. Dữ liệu log được gửi về Loki trên cổng 3100. Bốn câu truy vấn LogQL mẫu đã được thực thi và kiểm chứng:
+  </p>
+  <pre>
+# Truy vấn 1: Xem toàn bộ log của container ứng dụng Web
+{container="qlsv_app"}
+
+# Truy vấn 2: Phân tích log Nginx dưới dạng JSON và lọc request lỗi (status >= 400)
+{container="qlsv_nginx"} | json | status >= 400
+
+# Truy vấn 3: Lọc thông báo lỗi và cảnh báo trên toàn bộ container
+{container=~"qlsv_.*"} |= "error" or {container=~"qlsv_.*"} |= "warn"
+
+# Truy vấn 4: Đo lường tốc độ phát sinh dòng log theo từng container
+sum by (container) (rate({container=~"qlsv_.*"}[1m]))
+  </pre>
+  <div class="caption">Hình 4.9. Truy vấn toàn bộ luồng log ứng dụng bằng LogQL trong Grafana Explore</div>
+  <div class="caption">Hình 4.10. Lọc log Nginx dạng JSON và phân tích mã trạng thái HTTP</div>
+  <div class="caption">Hình 4.11. Thống kê tần suất log theo container bằng hàm rate trong LogQL</div>
+
+  <h2 class="sub-title">4.8. Hardening và quản lý mã nguồn</h2>
+  <h3 class="sub-sub-title">4.8.1. Hardening</h3>
+  <p>
+    Hệ thống đã triển khai đầy đủ 6 biện pháp bảo mật:
+  </p>
+  <ol>
+    <li><strong>Chạy ứng dụng dưới quyền Non-root:</strong> <code>qlsv_app</code> chạy user <code>node</code> (UID 1000), <code>qlsv_prometheus</code> chạy user <code>nobody</code> (UID 65534), <code>qlsv_grafana</code> chạy user <code>grafana</code> (UID 472), <code>qlsv_loki</code> chạy user <code>loki</code> (UID 10001).</li>
+    <li><strong>Cô lập mạng (Network Isolation):</strong> Tạo 3 mạng nội bộ độc lập (<code>qlsv_frontend_net, qlsv_backend_net, qlsv_monitoring_net</code>). Cổng MySQL 3306 không mở ra host.</li>
+    <li><strong>Phân quyền tối thiểu Database (Least Privilege):</strong> Ứng dụng chỉ dùng tài khoản <code>student_user</code> với quyền hạn mức <code>SELECT, INSERT, UPDATE, DELETE</code>, không dùng root.</li>
+    <li><strong>Mật khẩu mạnh & Bảo vệ Secret:</strong> File <code>.env</code> loại trừ qua <code>.gitignore</code>. Mật khẩu phức tạp độ dài trên 16 ký tự.</li>
+    <li><strong>Nginx Security Headers & TLS Hiện đại:</strong> Kích hoạt HSTS, chống Clickjacking, nosniff, lọc XSS, ẩn số hiệu phiên bản và chỉ dùng TLS 1.2/1.3.</li>
+    <li><strong>Resource Limits & Security Opts:</strong> Khai báo trần CPU/RAM; bật cờ <code>security_opt: [no-new-privileges:true]</code>.</li>
+  </ol>
+  <div class="caption">Hình 4.12. Minh chứng Hardening bằng các lệnh kiểm tra thực tế trong container</div>
+
+  <h3 class="sub-sub-title">4.8.2. Git và GitHub</h3>
+  <p>
+    Toàn bộ mã nguồn và tệp cấu hình được quản lý trên GitHub tại:  
+    <a href="https://github.com/dtc245200257-cell/de02_quanlysinhvien" target="_blank">https://github.com/dtc245200257-cell/de02_quanlysinhvien</a>  
+    Lịch sử commit được chia làm 3 mốc rõ ràng theo đúng tiến trình yêu cầu của đề tài:
+  </p>
+  <ul>
+    <li><code>fb22535</code> - Commit 1: Triển khai Ứng dụng Web, MySQL, phpMyAdmin và Nginx Reverse Proxy (SSL & Security Headers).</li>
+    <li><code>55304ca</code> - Commit 2: Tích hợp hệ thống giám sát Prometheus, Grafana và các Exporter.</li>
+    <li><code>5e5fa74</code> - Commit 3: Triển khai hệ thống log tập trung Loki + Promtail (LogQL) và Hardening toàn diện.</li>
+  </ul>
+  <div class="caption">Hình 4.13. Lịch sử các commit có cấu trúc rõ ràng trên GitHub</div>
+
+  <div class="page-break"></div>
+
+  <!-- ================= CHƯƠNG 5 ================= -->
+  <h1 class="sec-title">CHƯƠNG 5. KIỂM THỬ VÀ ĐÁNH GIÁ</h1>
+  
+  <h2 class="sub-title">5.1. Phương pháp kiểm thử</h2>
+  <p>
+    Kiểm thử được thực hiện đa tầng:
+  </p>
+  <ul>
+    <li><strong>Tầng ứng dụng & chức năng:</strong> Kiểm tra các API RESTful qua lệnh <code>curl</code> và giao diện Web (thêm, sửa, xóa, tìm kiếm, tính điểm GPA, nạp dữ liệu seed).</li>
+    <li><strong>Tầng hạ tầng & mạng:</strong> Kiểm tra trạng thái container (<code>docker compose ps</code>), cú pháp Nginx (<code>nginx -t</code>), chuyển hướng HTTP 301, chứng chỉ SSL và các Security Headers (<code>curl -k -I</code>).</li>
+    <li><strong>Tầng giám sát & ghi log:</strong> Kiểm tra trạng thái các Prometheus Targets, đối chiếu số liệu hiển thị trên Dashboard Grafana, thực thi các truy vấn LogQL kiểm tra độ trễ truyền log từ Promtail tới Loki.</li>
+    <li><strong>Tầng bảo mật:</strong> Kiểm tra UID của tiến trình đang chạy trong container (<code>id</code>), kiểm tra tính ẩn của mạng backend (<code>docker network inspect</code>) và kiểm tra quyền hạn của user MySQL.</li>
+  </ul>
+
+  <h2 class="sub-title">5.2. Kết quả kiểm thử chức năng</h2>
+  <div class="caption">Bảng 5.1. Kết quả kiểm thử chức năng ứng dụng Web</div>
+  <table>
+    <tr>
+      <th style="width: 25%;">Ca kiểm thử</th>
+      <th style="width: 30%;">Thao tác thực hiện</th>
+      <th style="width: 33%;">Kết quả thực tế</th>
+      <th style="width: 12%;">Đánh giá</th>
+    </tr>
+    <tr>
+      <td><strong>Kiểm tra Healthcheck</strong></td>
+      <td><code>GET /health</code></td>
+      <td>HTTP 200, status: UP, database: CONNECTED</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Thống kê Dashboard</strong></td>
+      <td><code>GET /api/stats</code></td>
+      <td>Trả về đúng 11 SV, 4 lớp, 4 môn, GPA 7.85</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Lấy danh sách SV</strong></td>
+      <td><code>GET /api/students</code></td>
+      <td>Trả về danh sách sinh viên sắp xếp mới nhất</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Tìm kiếm sinh viên</strong></td>
+      <td>Nhập từ khóa tìm kiếm</td>
+      <td>Lọc chính xác độ trễ $< 50\text{ms}$</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Thêm mới sinh viên</strong></td>
+      <td><code>POST /api/students</code></td>
+      <td>Bản ghi lưu vào MySQL, gauge tăng thêm 1</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Trùng mã sinh viên</strong></td>
+      <td><code>POST</code> mã SV đã có</td>
+      <td>Báo lỗi Duplicate entry for key</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Tính điểm tổng kết</strong></td>
+      <td>Nhập QT: 8.0, Thi: 9.0</td>
+      <td>Điểm TK: 8.6, Điểm chữ: A (Giỏi)</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Xóa sinh viên</strong></td>
+      <td><code>DELETE /api/students/:id</code></td>
+      <td>Xóa thành công, danh sách tự cập nhật</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>phpMyAdmin quản trị</strong></td>
+      <td>Truy cập <code>/phpmyadmin/</code></td>
+      <td>Truy cập mượt mà qua HTTPS reverse proxy</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+  </table>
+
+  <h2 class="sub-title">5.3. Kết quả kiểm thử hạ tầng và bảo mật</h2>
+  <div class="caption">Bảng 5.2. Kết quả kiểm thử hạ tầng, giám sát và bảo mật</div>
+  <table>
+    <tr>
+      <th style="width: 28%;">Hạng mục kiểm tra</th>
+      <th style="width: 35%;">Phương pháp / Lệnh kiểm tra</th>
+      <th style="width: 25%;">Kết quả thực tế</th>
+      <th style="width: 12%;">Đánh giá</th>
+    </tr>
+    <tr>
+      <td><strong>Trạng thái 11 container</strong></td>
+      <td><code>docker compose ps</code></td>
+      <td>11/11 services Up / healthy</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Cú pháp Compose</strong></td>
+      <td><code>docker compose config --quiet</code></td>
+      <td>Không có cảnh báo hoặc lỗi</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Cấu hình Nginx</strong></td>
+      <td><code>docker exec qlsv_nginx nginx -t</code></td>
+      <td>syntax ok, test successful</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Chuyển hướng HTTP 301</strong></td>
+      <td><code>curl -I http://192.168.253.129/</code></td>
+      <td>HTTP/1.1 301 Moved $\rightarrow$ HTTPS</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Security Headers</strong></td>
+      <td><code>curl -k -I https://192.168.253.129/</code></td>
+      <td>Đủ HSTS, nosniff, SAMEORIGIN...</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Prometheus Targets</strong></td>
+      <td><code>http://192.168.253.129:9090/targets</code></td>
+      <td>5/5 targets đều UP</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Grafana Dashboards</strong></td>
+      <td>Mở thư mục QLSV Monitoring</td>
+      <td>2 Dashboards nạp sẵn, hiển thị tốt</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Thu thập Log Loki</strong></td>
+      <td>LogQL <code>{container="qlsv_app"}</code></td>
+      <td>Luồng log hiển thị trên Explore</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Người dùng Non-root</strong></td>
+      <td><code>docker exec qlsv_app id</code></td>
+      <td><code>uid=1000(node)</code></td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Bảo vệ file bí mật</strong></td>
+      <td><code>git check-ignore -v .env</code></td>
+      <td>File <code>.env</code> được ignore</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+    <tr>
+      <td><strong>Cô lập mạng Database</strong></td>
+      <td><code>docker network inspect qlsv_backend_net</code></td>
+      <td>Mạng riêng biệt, port 3306 ẩn</td>
+      <td class="center" style="color: green; font-weight: bold;">Đạt</td>
+    </tr>
+  </table>
+
+  <h2 class="sub-title">5.4. Các lỗi phát hiện trong quá trình hoàn thiện</h2>
+  <h3 class="sub-sub-title">5.4.1. Healthcheck kết nối 127.0.0.1 thay cho localhost trên Alpine Linux</h3>
+  <p>
+    Trong quá trình build ban đầu, container <code>qlsv_app</code> báo trạng thái <code>unhealthy</code> do <code>localhost</code> được nhân Alpine phân giải sang IPv6 <code>::1</code>, trong khi Node.js lắng nghe trên IPv4. Giải pháp là sửa Healthcheck thành <code>wget -q -O - http://127.0.0.1:3000/health > /dev/null || exit 1</code>.
+  </p>
+
+  <h3 class="sub-sub-title">5.4.2. Tường lửa Ubuntu UFW chặn cổng Grafana (3000) và Prometheus (9090)</h3>
+  <p>
+    Trình duyệt báo lỗi <code>ERR_CONNECTION_TIMED_OUT</code> khi truy cập cổng 3000 do tường lửa UFW máy chủ chặn gói tin. Giải pháp là chạy lệnh mở quy tắc: <code>sudo ufw allow 3000/tcp && sudo ufw allow 9090/tcp</code>.
+  </p>
+
+  <h3 class="sub-sub-title">5.4.3. Xác thực cấu hình MySQL Exporter thông qua file my.cnf</h3>
+  <p>
+    MySQL Exporter v0.15.1 báo lỗi thiếu tài khoản khi đọc từ biến môi trường. Giải pháp là tạo file <code>database/my.cnf</code> và mount vào container với quyền <code>:ro</code> kèm cờ <code>--config.my-cnf=/.my.cnf</code>.
+  </p>
+
+  <h2 class="sub-title">5.5. Đánh giá theo yêu cầu đề bài</h2>
+  <div class="caption">Bảng 5.3. Đánh giá mức độ đáp ứng các tiêu chí đề tài</div>
+  <table>
+    <tr>
+      <th style="width: 35%;">Tiêu chí đánh giá</th>
+      <th style="width: 15%;">Điểm tối đa</th>
+      <th style="width: 15%;">Tự đánh giá</th>
+      <th style="width: 35%;">Minh chứng kết quả thực tế</th>
+    </tr>
+    <tr>
+      <td>1. Quản lý mã nguồn trên GitHub</td>
+      <td class="center">1.5</td>
+      <td class="center">1.5</td>
+      <td>Repository công khai, đủ 3 commit, README chi tiết</td>
+    </tr>
+    <tr>
+      <td>2. Triển khai ứng dụng + Database</td>
+      <td class="center">1.5</td>
+      <td class="center">1.5</td>
+      <td>Web Node.js ổn định, MySQL lưu trữ bền, phpMyAdmin OK</td>
+    </tr>
+    <tr>
+      <td>3. Nginx Reverse Proxy</td>
+      <td class="center">1.5</td>
+      <td class="center">1.5</td>
+      <td>Reverse proxy chuẩn, HTTPS cổng 443, Security Headers đủ</td>
+    </tr>
+    <tr>
+      <td>4. Hệ thống giám sát (Prometheus/Grafana)</td>
+      <td class="center">1.5</td>
+      <td class="center">1.5</td>
+      <td>5/5 targets UP, Dashboard trực quan hóa Web, MySQL, Host</td>
+    </tr>
+    <tr>
+      <td>5. Hệ thống log tập trung (Loki)</td>
+      <td class="center">1.5</td>
+      <td class="center">1.5</td>
+      <td>Loki + Promtail thu gom tự động, 4 truy vấn LogQL thực tế</td>
+    </tr>
+    <tr>
+      <td>6. Hardening hệ thống</td>
+      <td class="center">1.5</td>
+      <td class="center">1.5</td>
+      <td>Đủ 6 biện pháp: non-root, network, least privilege, limits</td>
+    </tr>
+    <tr>
+      <td>7. Tổng thể & Trình bày</td>
+      <td class="center">1.0</td>
+      <td class="center">1.0</td>
+      <td>11 containers chạy mượt mà bằng Compose, báo cáo chi tiết</td>
+    </tr>
+    <tr style="background-color: #f2f2f2; font-weight: bold;">
+      <td class="center">TỔNG ĐIỂM ĐÁNH GIÁ</td>
+      <td class="center">10.0</td>
+      <td class="center">10.0 / 10.0</td>
+      <td>Hoàn thành xuất sắc toàn bộ yêu cầu đề bài</td>
+    </tr>
+  </table>
+
+  <h2 class="sub-title">5.6. Hạn chế</h2>
+  <p>
+    Chứng chỉ SSL hiện tại sử dụng dạng tự ký (Self-signed) cho địa chỉ IP nội bộ, do đó trình duyệt web ban đầu hiển thị cảnh báo tin cậy. Container cAdvisor yêu cầu cờ <code>privileged: true</code> để truy cập vào hệ thống tệp cgroup của Linux, phù hợp cho môi trường lab thực hành nhưng cần hạn chế trên môi trường sản xuất thực tế.
+  </p>
+
+  <h2 class="sub-title">5.7. Hướng phát triển</h2>
+  <ul>
+    <li>Tích hợp Certbot / Let's Encrypt tự động cấp phát và gia hạn chứng chỉ SSL hợp lệ khi gán tên miền chính thức.</li>
+    <li>Xây dựng hệ thống cảnh báo tự động (Alertmanager) gửi thông báo qua Telegram hoặc Email khi máy chủ gặp sự cố.</li>
+    <li>Tích hợp đường ống CI/CD tự động thông qua GitHub Actions để tự động build và deploy mã nguồn.</li>
+    <li>Nâng cấp mô hình từ Docker Compose sang cụm điều phối Kubernetes (K8s) với khả năng tự co giãn tải (Auto-scaling).</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- ================= KẾT LUẬN ================= -->
+  <h1 class="sec-title">KẾT LUẬN</h1>
+  <p>
+    Sau thời gian nghiêm túc nghiên cứu và thực hành, em đã hoàn thành toàn diện <strong>Đề tài số 02: Hệ thống Quản lý Sinh viên</strong> thuộc học phần <em>Triển khai và Quản trị Hệ thống Phần mềm</em>. Hệ thống không chỉ đáp ứng trọn vẹn các yêu cầu nghiệp vụ về quản lý hồ sơ sinh viên, lớp học và điểm số học phần, mà quan trọng hơn đã thiết lập được một môi trường hạ tầng phân tán theo chuẩn công nghiệp với đầy đủ các trụ cột DevOps hiện đại:
+  </p>
+  <ol>
+    <li><strong>Container hóa đồng nhất:</strong> Đóng gói 11 dịch vụ hoạt động độc lập, không phụ thuộc vào môi trường host và khởi chạy đơn giản qua Docker Compose.</li>
+    <li><strong>Bảo mật và an toàn thông tin:</strong> Thiết lập cổng Reverse Proxy an toàn với HTTPS, chuyển hướng HTTP 301, Security Headers, cô lập mạng dữ liệu backend và áp dụng nguyên tắc người dùng non-root.</li>
+    <li><strong>Giám sát số liệu chủ động (Observability):</strong> Thu thập toàn diện chỉ số hiệu năng thông qua cụm Prometheus và hiển thị trực quan qua Grafana Dashboard.</li>
+    <li><strong>Quản trị nhật ký thông minh:</strong> Thu gom tự động và truy vấn phân tích log thời gian thực với Grafana Loki và Promtail (LogQL).</li>
+    <li><strong>Kỷ luật quản lý mã nguồn:</strong> Duy trì kho lưu trữ GitHub sạch sẽ, phân tách các mốc commit có ý nghĩa kỹ thuật và cung cấp tài liệu vận hành chi tiết.</li>
+  </ol>
+  <p>
+    Quá trình thực hiện đề tài đã giúp em củng cố sâu sắc kiến thức lý thuyết về kiến trúc mạng máy tính, quản trị hệ điều hành Linux, công nghệ container và các phương pháp vận hành hệ thống phần mềm hiện đại, tạo nền tảng vững chắc cho công việc chuyên môn trong tương lai.
+  </p>
+  <p>
+    Em xin chân thành cảm ơn thầy <strong>VŨ VIỆT DŨNG</strong> đã tận tình hướng dẫn, truyền đạt kiến thức và định hướng phương pháp triển khai để em có thể hoàn thành tốt bài thực hành này!
+  </p>
+
+  <div class="page-break"></div>
+
+  <!-- ================= TÀI LIỆU THAM KHẢO ================= -->
+  <h1 class="sec-title">TÀI LIỆU THAM KHẢO</h1>
+  <ol>
+    <li><strong>Bộ môn Hệ thống Thông tin & Mạng máy tính:</strong> <em>Tài liệu Hướng dẫn Đề tài thực hành Môn Triển khai và Quản trị Hệ thống Phần mềm</em>, Trường Đại học Công nghệ Thông tin và Truyền thông (ICTU), 2026.</li>
+    <li><strong>Docker Documentation:</strong> <em>Networking in Compose & Compose file specification reference</em>, https://docs.docker.com/compose/ (truy cập tháng 10/2026).</li>
+    <li><strong>Nginx Documentation:</strong> <em>Module ngx_http_proxy_module & ngx_http_ssl_module reference</em>, https://nginx.org/en/docs/ (truy cập tháng 10/2026).</li>
+    <li><strong>MySQL Documentation:</strong> <em>MySQL 8.0 Reference Manual: Security & User Account Management</em>, https://dev.mysql.com/doc/refman/8.0/en/ (truy cập tháng 10/2026).</li>
+    <li><strong>Prometheus Documentation:</strong> <em>Getting Started, Configuration and PromQL Basics</em>, https://prometheus.io/docs/ (truy cập tháng 10/2026).</li>
+    <li><strong>Grafana Labs Documentation:</strong> <em>Dashboards, Provisioning and Loki LogQL Reference</em>, https://grafana.com/docs/ (truy cập tháng 10/2026).</li>
+    <li><strong>OWASP Foundation:</strong> <em>REST Security Cheat Sheet & Secure Headers Project Guide</em>, https://cheatsheetseries.owasp.org/ (truy cập tháng 10/2026).</li>
+    <li><strong>Express.js Documentation:</strong> <em>Production Best Practices: Performance and Reliability</em>, https://expressjs.com/ (truy cập tháng 10/2026).</li>
+  </ol>
+
+  <div class="page-break"></div>
+
+  <!-- ================= PHỤ LỤC ================= -->
+  <h1 class="sec-title">PHỤ LỤC</h1>
+  
+  <h2 class="sub-title">A. Các lệnh kiểm tra chính trên máy chủ</h2>
+  <pre>
+# Kiểm tra cú pháp Docker Compose
+docker compose config --quiet
+
+# Kiểm tra trạng thái hoạt động của 11 container
+docker compose ps
+
+# Kiểm tra cú pháp cấu hình Nginx
+docker compose exec nginx nginx -t
+
+# Kiểm tra định danh người dùng non-root của ứng dụng Node.js
+docker compose exec app id
+
+# Kiểm tra file .env được bỏ qua trong Git
+git check-ignore -v .env
+
+# Kiểm tra mạng nội bộ backend được cô lập
+docker network inspect qlsv_backend_net --format '{{.Internal}}'
+  </pre>
+
+  <h2 class="sub-title">B. PromQL đã sử dụng trong Dashboard Grafana</h2>
+  <pre>
+# Tốc độ request HTTP trên giây
+sum(rate(qlsv_http_requests_total[1m]))
+
+# Phân vị độ trễ p95 của ứng dụng
+histogram_quantile(0.95, sum(rate(qlsv_http_request_duration_seconds_bucket[1m])) by (le))
+
+# Tần suất truy vấn MySQL trên giây
+rate(mysql_global_status_queries[1m])
+
+# Số kết nối đang hoạt động tới MySQL
+mysql_global_status_threads_connected
+
+# Phần trăm tải CPU của hệ thống host
+100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100)
+
+# Dung lượng RAM sử dụng của máy chủ host
+node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes
+  </pre>
+
+  <h2 class="sub-title">C. LogQL đã sử dụng trong Loki Explore</h2>
+  <pre>
+# Xem toàn bộ luồng log ứng dụng Node.js
+{container="qlsv_app"}
+
+# Lọc log Nginx dạng JSON và tìm request lỗi
+{container="qlsv_nginx"} | json | status >= 400
+
+# Lọc cảnh báo và lỗi trên toàn bộ container
+{container=~"qlsv_.*"} |= "error" or {container=~"qlsv_.*"} |= "warn"
+
+# Thống kê tốc độ sinh log theo container
+sum by (container) (rate({container=~"qlsv_.*"}[1m]))
+  </pre>
+
+  <h2 class="sub-title">D. Danh mục API chính của hệ thống</h2>
+  <ul>
+    <li><code>GET /health</code>: Kiểm tra trạng thái sức khỏe ứng dụng và kết nối MySQL.</li>
+    <li><code>GET /metrics</code>: Xuất các số liệu đo lường theo chuẩn Prometheus.</li>
+    <li><code>GET /api/stats</code>: Lấy thống kê tổng quan (số SV, lớp, môn, GPA, phân bố học lực).</li>
+    <li><code>GET /api/students</code>: Lấy danh sách sinh viên (hỗ trợ <code>search</code> và <code>class_id</code>).</li>
+    <li><code>POST /api/students</code>: Tạo mới hồ sơ sinh viên.</li>
+    <li><code>PUT /api/students/:id</code>: Cập nhật thông tin sinh viên.</li>
+    <li><code>DELETE /api/students/:id</code>: Xóa sinh viên khỏi hệ thống.</li>
+    <li><code>GET /api/classes</code>: Lấy danh sách lớp kèm sĩ số sinh viên tự động.</li>
+    <li><code>GET /api/courses</code>: Lấy danh mục các môn học.</li>
+    <li><code>GET /api/grades</code>: Lấy bảng điểm học phần của sinh viên.</li>
+    <li><code>POST /api/grades</code>: Nhập hoặc cập nhật điểm học phần.</li>
+  </ul>
+
+  <h2 class="sub-title">E. Lưu ý vận hành</h2>
+  <ul>
+    <li><strong>Bảo toàn dữ liệu MySQL:</strong> Tuyệt đối không sử dụng lệnh <code>docker compose down -v</code> vì tùy chọn <code>-v</code> sẽ xóa sạch Docker Volume <code>mysql_data</code>, làm mất toàn bộ cơ sở dữ liệu sinh viên đã nhập.</li>
+    <li><strong>Cập nhật ứng dụng:</strong> Khi chỉnh sửa mã nguồn trong thư mục <code>app/</code>, chỉ cần build lại service <code>app</code> bằng lệnh <code>docker compose up -d --build app</code> mà không cần tắt các dịch vụ Database, Nginx hay Monitoring đang chạy.</li>
+    <li><strong>Khởi động lại tường lửa:</strong> Nếu máy chủ khởi động lại và không truy cập được vào cổng 3000 hoặc 9090, hãy kiểm tra lại trạng thái UFW bằng lệnh <code>sudo ufw status</code> để đảm bảo các cổng vẫn được cho phép.</li>
+  </ul>
+
+</body>
+</html>
